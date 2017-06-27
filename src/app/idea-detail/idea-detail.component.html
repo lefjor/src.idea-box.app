@@ -1,0 +1,18 @@
+<div class="card-deck px-3">
+  <div class="card text-center mb-3">
+    <div class="card-header">
+      <img *ngIf="idea?.image" class="card-img-top" src="" alt="Card image cap">
+    </div>
+    <div class="card-block">
+      <h4 class="card-title">{{idea?.title}}</h4>
+
+      <p class="card-text font-italic">{{idea?.shortDescription}}</p>
+
+      <p class="card-text">{{idea?.longDescription}}</p>
+
+    </div>
+    <div class="card-footer text-muted">
+      {{idea?.lastModified | date : 'dd/MM/yyyy à HH:mm'}}
+    </div>
+  </div>
+</div>

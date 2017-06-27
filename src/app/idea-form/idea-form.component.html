@@ -1,0 +1,54 @@
+<div class="row px-3" [hidden]="!alertDisplay">
+  <div class="col-12 mt-3">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h4 class="alert-heading">Idée ajoutée !</h4>
+      <p>Tout le monde peut la voir et la commenter à volonté.</p>
+    </div>
+  </div>
+</div>
+<div class="row px-3">
+  <div class="col-12 col-md-6 mt-3">
+    <h3>Mon idée</h3>
+
+    <form (ngSubmit)="validateForm()" #ideaForm="ngForm">
+      <div class="form-group">
+        <label for="title">Titre</label>
+        <input class="form-control" id="title" name="title" placeholder="Titre qui va révolutionner l'entreprise"
+               [(ngModel)]="idea.title" minlength="5" required/>
+        <small id="titleHelp" class="form-text text-muted">Donner un titre à votre idée !</small>
+      </div>
+      <div class="form-group py-3">
+        <label for="shortDescription">Description courte</label>
+        <input class="form-control" name="shortDescription" id="shortDescription"
+               placeholder="Titre qui va révolutionner l'entreprise" [(ngModel)]="idea.shortDescription" minlength="5"
+               required/>
+        <small id="shortDescriptionHelp" class="text-muted">Décriver au mieux votre idée.</small>
+      </div>
+      <div class="form-group">
+        <label for="longDescription">Description longue</label>
+          <textarea class="form-control" name="longDescription" id="longDescription"
+                    placeholder="Descrition de l'idée de génie" [(ngModel)]="idea.longDescription" minlength="5"
+                    required></textarea>
+        <small id="longDescriptionHelp" class="form-text text-muted">Décriver au mieux votre idée.</small>
+      </div>
+      <!--<div class="form-group">-->
+      <!--<label for="exampleInputFile">Image descriptive</label>-->
+      <!--<input type="file" class="form-control-file inputfile inputfile-1" id="exampleInputFile" aria-describedby="fileHelp">-->
+      <!--<small id="fileHelp" class="form-text text-muted">Image descriptive</small>-->
+      <!--</div>-->
+      <button type="submit" [disabled]="ideaForm.invalid" class="btn btn-primary">Soumettre mon idée</button>
+    </form>
+  </div>
+  <div class="col-12 col-md-6 mt-3">
+    <h3>Preview</h3>
+
+    <div class="card mt-3">
+      <app-idea-view [idea]="idea" [linkEnabled]="false"></app-idea-view>
+  </div>
+</div>
+
+
+
