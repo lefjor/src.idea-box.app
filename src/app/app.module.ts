@@ -11,11 +11,16 @@ import {IdeaListComponent } from './idea-list/idea-list.component';
 import {IdeaDetailComponent} from './idea-detail/idea-detail.component';
 
 import {IdeaStoreService} from './service/idea-store.service';
+import {AuthService} from './service/auth.service';
 import {IdeaFormComponent} from './idea-form/idea-form.component';
 import {IdeaViewComponent} from './idea-view/idea-view.component';
 
 import {AngularFireModule} from 'angularfire2';
 import {AngularFireDatabaseModule} from "angularfire2/database";
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { LoginFormComponent } from './login-form/login-form.component';
+import { AuthGuard} from './service/guard/auth.guard';
+
 
 // Initialize Firebase
 export const firebaseConfig = {
@@ -35,6 +40,7 @@ export const firebaseConfig = {
     IdeaDetailComponent,
     IdeaFormComponent,
     IdeaViewComponent,
+    LoginFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,9 +48,10 @@ export const firebaseConfig = {
     HttpModule,
     RouterModule.forRoot(ROUTES),
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
-  providers: [IdeaStoreService],
+  providers: [IdeaStoreService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {
