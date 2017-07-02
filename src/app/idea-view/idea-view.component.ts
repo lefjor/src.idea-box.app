@@ -2,6 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import {Router} from '@angular/router';
 
 import {Idea} from '../model/idea';
+import {IdeaStoreService} from '../service/idea-store.service';
+
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-idea-view',
@@ -9,15 +12,26 @@ import {Idea} from '../model/idea';
   styleUrls: ['./idea-view.component.scss']
 })
 export class IdeaViewComponent implements OnInit {
-  @Input() idea : Idea;
-  @Input() linkEnabled : boolean;
+  @Input() idea:Idea;
+  @Input() linkEnabled:boolean;
 
-  constructor(private router : Router) { }
+  constructor(private router:Router, private modalService:NgbModal, private ideaStoreService:IdeaStoreService) {
+  }
 
   ngOnInit() {
   }
 
-  public navigateToDetail(idea : Idea) {
+  public open(content):void {
+    this.modalService.open(content);
+  }
+
+  public deleteIdea():void {
+    this.ideaStoreService.deleteIdea(this.idea.$key).catch((error => {
+      console.log(error)
+    }));
+  }
+
+  public navigateToDetail(idea:Idea) {
     this.router.navigate(['idea-detail', idea.$key]);
   }
 

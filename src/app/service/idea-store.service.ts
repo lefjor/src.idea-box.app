@@ -5,6 +5,8 @@ import {BehaviorSubject, Observable} from "rxjs";
 
 import {AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
 
+import * as firebase from 'firebase/app';
+
 @Injectable()
 export class IdeaStoreService {
   //private _ideas$:BehaviorSubject<Idea[]> = new BehaviorSubject<Idea[]>([]);
@@ -26,5 +28,9 @@ export class IdeaStoreService {
 
   public getIdea($key : string) : FirebaseObjectObservable<Idea> {
     return this.af.object('/ideas/' + $key);
+  }
+
+  public deleteIdea($key : string) : firebase.Promise<void> {
+    return this.af.object('/ideas/' + $key).remove();
   }
 }

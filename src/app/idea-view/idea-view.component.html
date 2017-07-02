@@ -11,7 +11,7 @@
   <button type="button" class="btn btn-warning mb-3" (click)="navigateToModication(idea)"
           [disabled]="!linkEnabled ? true : null">Modifier l'idée
   </button>
-    <button type="button" class="btn btn-danger mb-3" (click)="navigateToModication(idea)"
+    <button type="button" class="btn btn-danger mb-3" (click)="open(content)"
             [disabled]="!linkEnabled ? true : null">Effacer l'idée
     </button>
   </div>
@@ -21,3 +21,19 @@
   <small class="text-muted">{{idea.lastModified | date : 'dd/MM/yyyy à HH:mm'}}</small>
 </div>
 
+<!-- Modal delete -->
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Suppression de l'idée</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Etes vous sur de supprimer l'idée "{{idea.title}}" ?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="deleteIdea();c()">Supprimer</button>
+    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Annuler</button>
+  </div>
+</ng-template>

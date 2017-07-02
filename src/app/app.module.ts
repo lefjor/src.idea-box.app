@@ -21,6 +21,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { AuthGuard} from './service/guard/auth.guard';
 
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 // Initialize Firebase
 export const firebaseConfig = {
@@ -46,6 +47,7 @@ export const firebaseConfig = {
     BrowserModule,
     FormsModule,
     HttpModule,
+    NgbModule.forRoot(),
     RouterModule.forRoot(ROUTES),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
