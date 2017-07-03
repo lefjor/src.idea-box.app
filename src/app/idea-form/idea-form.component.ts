@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+
 import { Idea} from '../model/idea';
 import {IdeaStoreService} from '../service/idea-store.service';
+
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-idea-form',
@@ -13,27 +17,41 @@ export class IdeaFormComponent implements OnInit {
 
   alertDisplay:boolean = false;
 
-  constructor(private ideaStoreService:IdeaStoreService) {
+  isModification:boolean = false;
+
+  constructor(private route:ActivatedRoute, private ideaStoreService:IdeaStoreService) {
   }
 
   ngOnInit() {
     console.log("IdeaFormComponent : ngOnInit");
-    this.idea.lastModified = new Date();
+    const ideaId:string = this.route.snapshot.paramMap.get('ideaId');
+    if (ideaId) {
+      console.log("Mode : modification");
+      this.ideaStoreService.getIdea(ideaId).subscribe(idea => {
+        this.idea = idea;
+        this.idea.lastModified = new Date();
+      });
+      this.isModification = true;
+    } else {
+      console.log("Mode : add");
+      this.idea.lastModified = new Date();
+    }
   }
-
-  public addIdea(newIdea:Idea):void {
-    console.log("app.component : addIdea");
-    this.ideaStoreService.addIdea(newIdea);
-  }
-
 
   public validateForm():void {
-    this.idea.image = "";
+    console.log("IdeaFormComponent : validateForm");
+    //this.idea.image = "";
     this.idea.lastModified = new Date();
 
-    this.addIdea(this.idea);
+    if (this.isModification) {
+      this.ideaStoreService.updateIdea(this.idea);
+    } else {
+      this.ideaStoreService.addIdea(this.idea).then(() => {
+        this.alertDisplay = true;
+      }).catch(error => {
 
-    this.alertDisplay = true;
+      });
+    }
 
     // Initialisation of a new idea
     this.idea = new Idea();

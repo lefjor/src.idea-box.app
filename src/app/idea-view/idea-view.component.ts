@@ -26,7 +26,9 @@ export class IdeaViewComponent implements OnInit {
   }
 
   public deleteIdea():void {
-    this.ideaStoreService.deleteIdea(this.idea.$key).catch((error => {
+    this.ideaStoreService.deleteIdea(this.idea.$key).then(() => {
+      console.log("Delete idea : OK");
+    }).catch((error => {
       console.log(error)
     }));
   }

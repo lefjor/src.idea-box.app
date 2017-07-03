@@ -48,7 +48,7 @@ export const firebaseConfig = {
     FormsModule,
     HttpModule,
     NgbModule.forRoot(),
-    RouterModule.forRoot(ROUTES),
+    RouterModule.forRoot(ROUTES/*, { enableTracing: true }*/ ),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule

@@ -10,7 +10,7 @@ import * as firebase from 'firebase/app';
 @Injectable()
 export class IdeaStoreService {
   //private _ideas$:BehaviorSubject<Idea[]> = new BehaviorSubject<Idea[]>([]);
-  private ideas : FirebaseListObservable<any[]>;
+  private ideas:FirebaseListObservable<any[]>;
   //private ideas:Idea[] = [];
 
   constructor(private af:AngularFireDatabase) {
@@ -22,15 +22,19 @@ export class IdeaStoreService {
     return this.ideas/*.asObservable()*/;
   }
 
-  public addIdea(newIdea:Idea) : void {
-    this.ideas.push(newIdea);
+  public addIdea(newIdea:Idea):firebase.database.ThenableReference {
+    return this.ideas.push(newIdea);
   }
 
-  public getIdea($key : string) : FirebaseObjectObservable<Idea> {
+  public getIdea($key:string):FirebaseObjectObservable<Idea> {
     return this.af.object('/ideas/' + $key);
   }
 
-  public deleteIdea($key : string) : firebase.Promise<void> {
+  public updateIdea(idea:Idea):firebase.Promise<void> {
+    return this.af.object('/ideas/' + idea.$key).update(idea);
+  }
+
+  public deleteIdea($key:string):firebase.Promise<void> {
     return this.af.object('/ideas/' + $key).remove();
   }
 }

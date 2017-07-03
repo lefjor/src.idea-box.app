@@ -9,9 +9,10 @@ import {AuthGuard} from './service/guard/auth.guard';
 export const ROUTES:Routes = [
   {path: '', component: LoginFormComponent},
   {path: 'idea-form', component : IdeaFormComponent, canActivate: [AuthGuard]},
+  {path: 'idea-form/:ideaId', component : IdeaFormComponent, canActivate: [AuthGuard]},
   {path: 'idea-detail/:ideaId', component : IdeaDetailComponent, canActivate: [AuthGuard]},
   {path: 'idea-list', component : IdeaListComponent, canActivate: [AuthGuard]},
 
   // default path to login
-  { path: '**', redirectTo: '' }
+  //{ path: '**', redirectTo: '' }
 ];

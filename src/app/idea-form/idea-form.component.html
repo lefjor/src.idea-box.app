@@ -39,7 +39,8 @@
       <!--<input type="file" class="form-control-file inputfile inputfile-1" id="exampleInputFile" aria-describedby="fileHelp">-->
       <!--<small id="fileHelp" class="form-text text-muted">Image descriptive</small>-->
       <!--</div>-->
-      <button type="submit" [disabled]="ideaForm.invalid" class="btn btn-primary">Soumettre mon idée</button>
+      <button *ngIf="isModification; else update" type="submit" [disabled]="ideaForm.invalid" class="btn btn-primary">Modifier mon idée</button>
+      <ng-template #update><button *ngIf="!isModification" type="submit" [disabled]="ideaForm.invalid" class="btn btn-primary">Soumettre mon idée</button></ng-template>
     </form>
   </div>
   <div class="col-12 col-md-6 mt-3">
@@ -49,6 +50,3 @@
       <app-idea-view [idea]="idea" [linkEnabled]="false"></app-idea-view>
   </div>
 </div>
-
-
-
