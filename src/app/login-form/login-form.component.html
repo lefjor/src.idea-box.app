@@ -1,4 +1,4 @@
-<div class="row px-3">
+<div class="row px-3 hidden-sm-up">
   <div class="col-12">
     <form class="form-signin">
       <h3 class="form-signin-heading">Identifiez-vous</h3>
@@ -13,15 +13,39 @@
         <label for="inputPassword">Mot de passe</label>
         <input type="password" name="password" [(ngModel)]="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required>
       </div>
+      <button class="btn btn-lg btn-primary btn-block btn-word-wrap" (click)="login()" [disabled]="!email || !password">Identifiez-vous</button>
+
+      <div class="pt-4 pb-2 text-center font-italic">Nouveau sur IdeaBox ?</div>
+      <button class="btn btn-lg btn-primary btn-block btn-word-wrap" (click)="signup()" [disabled]="!email || !password">Créer un compte</button>
+    </form>
+  </div>
+</div>
+<div class="row px-3 hidden-xs-down">
+  <div class="col"></div>
+  <div class="col">
+    <form class="form-signin">
+      <h3 class="form-signin-heading">Identifiez-vous</h3>
+      <div [hidden]="!isError" class="alert alert-danger" role="alert">
+        <strong>Erreur :</strong> {{(error)?.message}}
+      </div>
+      <div class="form-group">
+        <label for="inputEmail">Adresse e-mail</label>
+        <input type="email" name="email" [(ngModel)]="email" id="inputEmail" class="form-control" placeholder="Adresse e-mail" required autofocus>
+      </div>
+      <div class="form-group">
+        <label for="inputPassword">Mot de passe</label>
+        <input type="password" name="password" [(ngModel)]="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required>
+      </div>
       <!--<div class="checkbox">-->
-        <!--<label>-->
-          <!--<input type="checkbox" value="remember-me"> Maintenir ma session ouverte-->
-        <!--</label>-->
+      <!--<label>-->
+      <!--<input type="checkbox" value="remember-me"> Maintenir ma session ouverte-->
+      <!--</label>-->
       <!--</div>-->
       <button class="btn btn-lg btn-primary btn-block" (click)="login()" [disabled]="!email || !password">Identifiez-vous</button>
 
       <div class="pt-4 pb-2 text-center font-italic">Nouveau sur IdeaBox ?</div>
-      <button class="btn btn-lg btn-primary btn-block" (click)="signup()" [disabled]="!email || !password">Créer un compte Idea Box</button>
+      <button class="btn btn-lg btn-primary btn-block" (click)="signup()" [disabled]="!email || !password">Créer un compte</button>
     </form>
   </div>
+  <div class="col"></div>
 </div>
