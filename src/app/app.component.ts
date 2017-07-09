@@ -10,7 +10,7 @@ import {Idea} from './model/idea';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  constructor(private ideaStoreService:IdeaStoreService, private router:Router, private authService:AuthService) {
+  constructor(private ideaStoreService:IdeaStoreService, private router:Router, public authService:AuthService) {
   }
 
   ngOnInit():void {
