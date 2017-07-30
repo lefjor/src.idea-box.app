@@ -11,6 +11,7 @@ import {IdeaListComponent } from './idea-list/idea-list.component';
 import {IdeaDetailComponent} from './idea-detail/idea-detail.component';
 
 import {IdeaStoreService} from './service/idea-store.service';
+import {CommentaryService} from './service/commentary.service';
 import {AuthService} from './service/auth.service';
 import {IdeaFormComponent} from './idea-form/idea-form.component';
 import {IdeaViewComponent} from './idea-view/idea-view.component';
@@ -22,6 +23,10 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { AuthGuard} from './service/guard/auth.guard';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { CommentaryFormComponent } from './commentary/commentary-form/commentary-form.component';
+import { CommentaryViewComponent } from './commentary/commentary-view/commentary-view.component';
+import { CommentaryListComponent } from './commentary/commentary-list/commentary-list.component';
+import { SignupFormComponent } from './signup-form/signup-form.component';
 
 // Initialize Firebase
 export const firebaseConfig = {
@@ -42,6 +47,10 @@ export const firebaseConfig = {
     IdeaFormComponent,
     IdeaViewComponent,
     LoginFormComponent,
+    CommentaryFormComponent,
+    CommentaryViewComponent,
+    CommentaryListComponent,
+    SignupFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,7 +62,7 @@ export const firebaseConfig = {
     AngularFireDatabaseModule,
     AngularFireAuthModule
   ],
-  providers: [IdeaStoreService, AuthService, AuthGuard],
+  providers: [IdeaStoreService, CommentaryService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

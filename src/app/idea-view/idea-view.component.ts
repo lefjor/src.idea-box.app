@@ -32,9 +32,4 @@ export class IdeaViewComponent implements OnInit {
       console.log(error)
     }));
   }
-
-  public navigateToDetail(idea:Idea) {
-    this.router.navigate(['idea-detail', idea.$key]);
-  }
-
 }

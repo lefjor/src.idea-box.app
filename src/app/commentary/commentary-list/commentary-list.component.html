@@ -1,0 +1,4 @@
+<div class="commentary-list-block mx-3 mb-3">
+  <app-commentary-form [idea]="idea | async"></app-commentary-form>
+  <app-commentary-view *ngFor="let comment of comments | async" [commentary]="comment"></app-commentary-view>
+</div>

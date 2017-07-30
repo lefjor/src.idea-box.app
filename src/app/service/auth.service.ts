@@ -13,12 +13,27 @@ export class AuthService {
     this.authState$ = afAuth.authState;
   }
 
+  getEmail():string {
+    return this.afAuth.auth.currentUser.email;
+  }
+
+  getPseudonyme():string {
+    return this.afAuth.auth.currentUser.displayName;
+  }
+
   loginWithEmailAndPassword(email:string, password:string):firebase.Promise<firebase.auth.UserCredential> {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
 
   signup(email:string, password:string):firebase.Promise<firebase.auth.UserCredential> {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password);
+  }
+
+  updateProfile(pseudonyme:string):firebase.Promise<any> {
+    return this.afAuth.auth.currentUser.updateProfile({
+      displayName: pseudonyme,
+      photoURL: null
+    });
   }
 
   logout() {

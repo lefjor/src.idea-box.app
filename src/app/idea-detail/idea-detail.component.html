@@ -1,23 +1,29 @@
-<div class="card-deck px-3">
-  <div class="card text-center mb-3">
-    <div class="card-header">
-      <img *ngIf="idea?.image" class="card-img-top" src="" alt="Card image cap">
-    </div>
-    <div class="card-block">
-      <h4 class="card-title">{{idea?.title}}</h4>
+<div *ngIf="idea | async as ideaModel">
+  <div class="card-deck px-3">
+    <div class="card text-center mb-3">
+      <div *ngIf="ideaModel.image" class="card-header">
+        <img class="card-img-top" src="" alt="Card image cap">
+      </div>
+      <div class="card-block">
+        <h4 class="card-title">{{ideaModel.title}}</h4>
 
-      <p class="card-text font-italic">{{idea?.shortDescription}}</p>
+        <p class="card-text font-italic">{{ideaModel.shortDescription}}</p>
 
-      <p class="card-text">{{idea?.longDescription}}</p>
+        <p class="card-text">{{ideaModel.longDescription}}</p>
 
-    </div>
-    <div class="card-footer text-muted">
-      {{idea?.lastModified | date : 'dd/MM/yyyy à HH:mm'}}
+      </div>
+      <div class="card-footer text-muted">
+        {{ideaModel.lastModified | date : 'dd/MM/yyyy à HH:mm'}}
+      </div>
     </div>
   </div>
+  <app-commentary-list [idea]="idea"></app-commentary-list>
+  <div class="text-center">
+    <a href="" routerLink="/idea-list" class="btn btn-primary mb-3">Retour à la liste</a>
+    <a href="" [routerLink]="['/idea-form',ideaModel.$key]" class="btn btn-warning mb-3">Modifier l'idée</a>
+    <!--<button type="button" class="btn btn-danger mb-3" (click)="navigateToModication(idea)">Effacer l'idée</button>-->
+  </div>
 </div>
-<div class="text-center">
-  <a href="" routerLink="/idea-list" class="btn btn-primary mb-3">Retour à la liste</a>
-  <a href="" [routerLink]="['/idea-form',idea.$key]" class="btn btn-warning mb-3" >Modifier l'idée</a>
-  <!--<button type="button" class="btn btn-danger mb-3" (click)="navigateToModication(idea)">Effacer l'idée</button>-->
-</div>
+
+
+

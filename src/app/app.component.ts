@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { IdeaStoreService} from './service/idea-store.service';
 import {AuthService} from './service/auth.service';
 import {Router} from '@angular/router';
 
@@ -10,7 +9,7 @@ import {Idea} from './model/idea';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  constructor(private ideaStoreService:IdeaStoreService, private router:Router, public authService:AuthService) {
+  constructor(private router:Router, public authService:AuthService) {
   }
 
   ngOnInit():void {

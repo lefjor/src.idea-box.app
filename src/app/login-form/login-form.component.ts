@@ -29,17 +29,4 @@ export class LoginFormComponent implements OnInit {
     });
     this.password = "";
   }
-
-  logout() {
-    this.authService.logout();
-  }
-
-  signup() {
-    this.authService.signup(this.email, this.password).catch((error : FirebaseError) => {
-      this.error = error;
-      this.isError = true;
-    });;
-    this.email = this.password = '';
-  }
-
 }

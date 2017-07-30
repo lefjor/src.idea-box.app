@@ -9,9 +9,7 @@ import * as firebase from 'firebase/app';
 
 @Injectable()
 export class IdeaStoreService {
-  //private _ideas$:BehaviorSubject<Idea[]> = new BehaviorSubject<Idea[]>([]);
   private ideas:FirebaseListObservable<any[]>;
-  //private ideas:Idea[] = [];
 
   constructor(private af:AngularFireDatabase) {
     console.log("IdeaStoreService : constructor");
@@ -26,8 +24,9 @@ export class IdeaStoreService {
     return this.ideas.push(newIdea);
   }
 
-  public getIdea($key:string):FirebaseObjectObservable<Idea> {
-    return this.af.object('/ideas/' + $key);
+  public getIdea(key:string):FirebaseObjectObservable<Idea> {
+    console.log("IdeaStoreService : getIdea : " + key);
+    return this.af.object(`/ideas/${key}`);
   }
 
   public updateIdea(idea:Idea):firebase.Promise<void> {

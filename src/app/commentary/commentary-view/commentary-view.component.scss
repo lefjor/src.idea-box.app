@@ -1,0 +1,33 @@
+.commentary-view-block {
+  p.comment-block {
+    margin-bottom: 0;
+    .author {
+      font-weight: bold;
+      white-space: nowrap;
+      color: #365899;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .main-comment {
+      text-align: justify;
+    }
+
+  }
+
+  p.comment-tools {
+    .link {
+      display: inline;
+      white-space: nowrap;
+      color: #365899;
+      cursor: pointer;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    .caracteristic {
+      color: #90949c;
+    }
+  }
+}
