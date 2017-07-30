@@ -1,5 +1,5 @@
 <div class="m-3">
-  <form class="form" (ngSubmit)="validateForm()" #ideaForm="ngForm">
+  <form class="form">
   <textarea [(ngModel)]="comment.value" [ngModelOptions]="{standalone: true}" style="width: 100%" type="text" class="form-control" rows="1"
             placeholder="Votre commentaire ..." (keydown.enter)="handleKeyEvent();false"></textarea>
   </form>
