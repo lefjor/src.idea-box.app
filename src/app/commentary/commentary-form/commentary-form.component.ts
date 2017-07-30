@@ -36,7 +36,9 @@ export class CommentaryFormComponent implements OnInit {
   }
 
   public handleKeyEvent():void {
-    this.addCommentToIdea(this.idea);
+    if(this.comment.value.trim() != "") {
+      this.addCommentToIdea(this.idea);
+    }
   }
 
   public addCommentToIdea(idea:Idea):void {
