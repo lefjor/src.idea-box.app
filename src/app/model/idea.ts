@@ -4,5 +4,5 @@ export class Idea {
   shortDescription : string;
   longDescription : string;
   image : string;
-  lastModified : Date;
+  lastModified : number;
 }

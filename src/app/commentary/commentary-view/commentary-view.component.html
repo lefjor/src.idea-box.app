@@ -1,6 +1,7 @@
 <div class="commentary-view-block mx-3">
   <p class="comment-block">
-    <span class="author">{{commentary.userPseudonyme}}</span>
+    <span class="author" *ngIf="commentary.userPseudonyme; else pseudoAlternatif">{{commentary.userPseudonyme}}</span>
+    <ng-template #pseudoAlternatif><span class="author">{{commentary.userId}}</span></ng-template>
     <span class="main-comment">{{commentary.value}}</span>
   </p>
   <p class="comment-tools">

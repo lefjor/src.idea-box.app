@@ -29,27 +29,31 @@ export class IdeaFormComponent implements OnInit {
       console.log("Mode : modification");
       this.ideaStoreService.getIdea(ideaId).subscribe(idea => {
         this.idea = idea;
-        this.idea.lastModified = new Date();
+        this.idea.lastModified = new Date().getTime();
       });
       this.isModification = true;
     } else {
       console.log("Mode : add");
-      this.idea.lastModified = new Date();
+      this.idea.lastModified = new Date().getTime();
     }
   }
 
   public validateForm():void {
     console.log("IdeaFormComponent : validateForm");
     //this.idea.image = "";
-    this.idea.lastModified = new Date();
+    this.idea.lastModified = new Date().getTime();
 
     if (this.isModification) {
-      this.ideaStoreService.updateIdea(this.idea);
+      this.ideaStoreService.updateIdea(this.idea).then(() => {
+        this.alertDisplay = true;
+      }).catch(error => {
+        console.log(error);
+      });
     } else {
       this.ideaStoreService.addIdea(this.idea).then(() => {
         this.alertDisplay = true;
       }).catch(error => {
-
+        console.log(error);
       });
     }
 

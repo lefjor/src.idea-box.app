@@ -4,7 +4,7 @@
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
-      <h4 class="alert-heading">Idée ajoutée !</h4>
+      <h4 class="alert-heading">Idée <span *ngIf="!isModification; else modificationBlock">ajoutée</span><ng-template #modificationBlock>modifiée</ng-template> !</h4>
       <p>Tout le monde peut la voir et la commenter à volonté.</p>
     </div>
   </div>

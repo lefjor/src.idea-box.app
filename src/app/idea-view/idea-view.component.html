@@ -1,22 +1,36 @@
 <img *ngIf="idea.image" class="card-img-top" src="..." alt="Card image cap">
+<h4 class="card-header text-center">{{idea.title}}</h4>
 <div class="card-block">
-  <h4 class="card-title text-center">{{idea.title}}</h4>
+  <p class="card-text text-center font-italic">{{idea.shortDescription | slice:0:125}}<span
+    *ngIf="idea.shortDescription && idea.shortDescription.length > 125">[...]</span></p>
 
-  <p class="card-text text-center font-italic">{{idea.shortDescription | slice:0:125}}<span *ngIf="idea.shortDescription && idea.shortDescription.length > 125">[...]</span></p>
+  <!--  <div class="text-center">
+      <a href="" [routerLink]="['/idea-detail',idea.$key]" class="btn btn-primary mb-3"
+         [class.disabled]="!linkEnabled ? true : null"><i class="octicon octicon-search"></i> Voir le détail de l'idée
+      </a>
+      <a href="" [routerLink]="['/idea-form',idea.$key]" class="btn btn-warning mb-3"
+         [class.disabled]="!linkEnabled ? true : null"><i class="octicon octicon-pencil"></i> Modifier l'idée</a>
+      <button type="button" class="btn btn-danger mb-3" (click)="open(content)"
+              [disabled]="!linkEnabled ? true : null"><i class="octicon octicon-trashcan"></i> Effacer l'idée
+      </button>
+    </div>-->
 
   <div class="text-center">
-    <a href="" [routerLink]="['/idea-detail',idea.$key]" class="btn btn-primary mb-3"
-            [class.disabled]="!linkEnabled ? true : null">Voir le détail de l'idée
-    </a>
-    <a href="" [routerLink]="['/idea-form',idea.$key]" class="btn btn-warning mb-3"
-       [class.disabled]="!linkEnabled ? true : null">Modifier l'idée</a>
-    <button type="button" class="btn btn-danger mb-3" (click)="open(content)"
-            [disabled]="!linkEnabled ? true : null">Effacer l'idée
-    </button>
+    <div class="btn-group" role="group" aria-label="Menu d'une idée">
+      <a href="" [routerLink]="['/idea-detail',idea.$key]" class="btn btn-secondary"
+         [class.disabled]="!linkEnabled ? true : null" [attr.tabindex]="!linkEnabled ? -1 : null"><i
+        class="octicon octicon-search"></i></a>
+      <a href="" [routerLink]="['/idea-form',idea.$key]" class="btn btn-secondary"
+         [class.disabled]="!linkEnabled ? true : null" [attr.tabindex]="!linkEnabled ? -1 : null"><i
+        class="octicon octicon-pencil"></i></a>
+      <button type="button" class="btn btn-secondary btn-" (click)="open(content)"
+              [disabled]="!linkEnabled ? true : null" [attr.tabindex]="!linkEnabled ? -1 : null"><i
+        class="octicon octicon-trashcan"></i></button>
+    </div>
   </div>
 
 </div>
-<div class="card-footer">
+<div class="card-footer text-center">
   <small class="text-muted">{{idea.lastModified | date : 'dd/MM/yyyy à HH:mm'}}</small>
 </div>
 
