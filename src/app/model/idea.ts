@@ -3,6 +3,6 @@ export class Idea {
   title : string;
   shortDescription : string;
   longDescription : string;
-  image : string;
+  imageSrc : string;
   lastModified : number;
 }

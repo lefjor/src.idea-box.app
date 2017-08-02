@@ -13,6 +13,7 @@ import {IdeaDetailComponent} from './idea-detail/idea-detail.component';
 import {IdeaStoreService} from './service/idea-store.service';
 import {CommentaryService} from './service/commentary.service';
 import {AuthService} from './service/auth.service';
+import {FileUploadService} from './service/file-upload.service';
 import {IdeaFormComponent} from './idea-form/idea-form.component';
 import {IdeaViewComponent} from './idea-view/idea-view.component';
 
@@ -57,12 +58,12 @@ export const firebaseConfig = {
     FormsModule,
     HttpModule,
     NgbModule.forRoot(),
-    RouterModule.forRoot(ROUTES/*, { enableTracing: true }*/ ),
+    RouterModule.forRoot(ROUTES/*, { enableTracing: true }*/),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule
   ],
-  providers: [IdeaStoreService, CommentaryService, AuthService, AuthGuard],
+  providers: [IdeaStoreService, CommentaryService, FileUploadService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

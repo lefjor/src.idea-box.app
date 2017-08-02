@@ -1,4 +1,4 @@
-<img *ngIf="idea.image" class="card-img-top" src="..." alt="Card image cap">
+<img *ngIf="idea.imageSrc" class="card-img-top img-fluid" [src]="idea.imageSrc" alt="Card image cap">
 <h4 class="card-header text-center">{{idea.title}}</h4>
 <div class="card-block">
   <p class="card-text text-center font-italic">{{idea.shortDescription | slice:0:125}}<span

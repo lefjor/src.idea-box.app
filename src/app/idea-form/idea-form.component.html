@@ -4,7 +4,10 @@
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
-      <h4 class="alert-heading">Idée <span *ngIf="!isModification; else modificationBlock">ajoutée</span><ng-template #modificationBlock>modifiée</ng-template> !</h4>
+      <h4 class="alert-heading">Idée <span *ngIf="!isModification; else modificationBlock">ajoutée</span>
+        <ng-template #modificationBlock>modifiée</ng-template>
+        !
+      </h4>
       <p>Tout le monde peut la voir et la commenter à volonté.</p>
     </div>
   </div>
@@ -34,13 +37,20 @@
                     required></textarea>
         <small id="longDescriptionHelp" class="form-text text-muted">Décriver au mieux votre idée.</small>
       </div>
-      <!--<div class="form-group">-->
-      <!--<label for="exampleInputFile">Image descriptive</label>-->
-      <!--<input type="file" class="form-control-file inputfile inputfile-1" id="exampleInputFile" aria-describedby="fileHelp">-->
-      <!--<small id="fileHelp" class="form-text text-muted">Image descriptive</small>-->
-      <!--</div>-->
-      <button *ngIf="isModification; else update" type="submit" [disabled]="ideaForm.invalid" class="btn btn-primary">Modifier mon idée</button>
-      <ng-template #update><button *ngIf="!isModification" type="submit" [disabled]="ideaForm.invalid" class="btn btn-primary">Soumettre mon idée</button></ng-template>
+      <div class="form-group">
+        <label for="imageInputFile">Image descriptive (bêta)</label>
+        <input type="file" name="imageInputFile" class="form-control-file inputfile inputfile-1" id="imageInputFile"
+               aria-describedby="fileHelp">
+        <small id="fileHelp" class="form-text text-muted">Image descriptive</small>
+      </div>
+      <button *ngIf="isModification; else update" type="submit" [disabled]="ideaForm.invalid" class="btn btn-primary">
+        Modifier mon idée
+      </button>
+      <ng-template #update>
+        <button *ngIf="!isModification" type="submit" [disabled]="ideaForm.invalid" class="btn btn-primary">Soumettre
+          mon idée
+        </button>
+      </ng-template>
     </form>
   </div>
   <div class="col-12 col-md-6 mt-3">
@@ -48,5 +58,5 @@
 
     <div class="card mt-3">
       <app-idea-view [idea]="idea" [linkEnabled]="false"></app-idea-view>
+    </div>
   </div>
-</div>

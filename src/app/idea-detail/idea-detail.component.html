@@ -1,8 +1,8 @@
 <div *ngIf="idea | async as ideaModel">
   <div class="card-deck px-3">
     <div class="card text-center mb-3">
-      <div *ngIf="ideaModel.image" class="card-header">
-        <img class="card-img-top" src="" alt="Card image cap">
+      <div *ngIf="ideaModel.imageSrc" class="card-header">
+        <img class="card-img-top img-fluid" [src]="ideaModel.imageSrc" alt="Card image cap">
       </div>
       <div class="card-block">
         <h4 class="card-title">{{ideaModel.title}}</h4>
