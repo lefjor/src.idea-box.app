@@ -18,7 +18,7 @@ export class IdeaFormComponent implements OnInit {
 
   isModification:boolean = false;
 
-  constructor(private route:ActivatedRoute, private ideaStoreService:IdeaStoreService, private fileUploadService : FileUploadService) {
+  constructor(private route:ActivatedRoute, private ideaStoreService:IdeaStoreService, private fileUploadService:FileUploadService) {
   }
 
   ngOnInit() {
@@ -39,9 +39,8 @@ export class IdeaFormComponent implements OnInit {
   }
 
   /*public fileChanged(event : any):void {
-    //this.fileUploadService.upload(event.srcElement.files[0]);
-  }*/
-
+   //this.fileUploadService.upload(event.srcElement.files[0]);
+   }*/
 
 
   public validateForm():void {
@@ -49,25 +48,36 @@ export class IdeaFormComponent implements OnInit {
 
     this.idea.lastModified = new Date().getTime();
 
-    this.fileUploadService.upload((<HTMLInputElement>document.getElementById('imageInputFile')).files).then((urlImage : string) => {
-      this.idea.imageSrc = urlImage;
-      if (this.isModification) {
-        this.ideaStoreService.updateIdea(this.idea).then(() => {
-          this.afterIdeaSubmission();
-        }).catch(error => {
-          console.log(error);
-        });
-      } else {
-        this.ideaStoreService.addIdea(this.idea).then(() => {
-          this.afterIdeaSubmission();
-        }).catch(error => {
-          console.log(error);
-        });
-      }
-    });
+    let files:FileList = (<HTMLInputElement>document.getElementById('imageInputFile')).files;
+
+    // Uploading files
+    if (files.length > 0) {
+      this.fileUploadService.upload((<HTMLInputElement>document.getElementById('imageInputFile')).files).then((urlImage:string) => {
+        this.idea.imageSrc = urlImage;
+        this.ideaProcess();
+      });
+    } else {
+      this.ideaProcess();
+    }
   }
 
-  private afterIdeaSubmission() : void {
+  private ideaProcess():void {
+    if (this.isModification) {
+      this.ideaStoreService.updateIdea(this.idea).then(() => {
+        this.afterIdeaSubmission();
+      }).catch(error => {
+        console.log(error);
+      });
+    } else {
+      this.ideaStoreService.addIdea(this.idea).then(() => {
+        this.afterIdeaSubmission();
+      }).catch(error => {
+        console.log(error);
+      });
+    }
+  }
+
+  private afterIdeaSubmission():void {
     this.alertDisplay = true;
     // Initialisation of a new idea
     this.idea = new Idea();

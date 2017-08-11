@@ -3,6 +3,8 @@ import {Router} from '@angular/router';
 
 import {Idea} from '../model/idea';
 import {IdeaStoreService} from '../service/idea-store.service';
+import {AuthService} from '../service/auth.service';
+import {ReactionService} from '../service/reaction.service';
 
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
@@ -15,10 +17,26 @@ export class IdeaViewComponent implements OnInit {
   @Input() idea:Idea;
   @Input() linkEnabled:boolean;
 
-  constructor(private router:Router, private modalService:NgbModal, private ideaStoreService:IdeaStoreService) {
+  userEmail:string;
+  alreadyLiked:boolean = false;
+  likeNumber:number = 0;
+
+  constructor(private router:Router, private modalService:NgbModal, private ideaStoreService:IdeaStoreService, private authService:AuthService, private reactionService:ReactionService) {
   }
 
   ngOnInit() {
+    this.authService.authState$.subscribe(() => {
+      this.userEmail = this.authService.getEmail();
+      this.reactionService.getAllReactions("thumbsup", this.idea.$key).subscribe((snapshots:Array<Object>) => {
+        this.likeNumber = 0;
+        snapshots.forEach(snapshot => {
+          this.likeNumber++;
+          if (snapshot["$value"] === this.userEmail) {
+            this.alreadyLiked = true;
+          }
+        });
+      })
+    });
   }
 
   public open(content):void {
@@ -31,5 +49,16 @@ export class IdeaViewComponent implements OnInit {
     }).catch((error => {
       console.log(error)
     }));
+  }
+
+  public thumbsUp():void {
+    //console.log("thumbsUp");
+    //console.log("Idea key : " + this.idea.$key);
+    //console.log("User id : " + this.userEmail);
+    if (!this.alreadyLiked) {
+      this.reactionService.addReaction(this.idea.$key, this.userEmail);
+    } else {
+      console.log("Already liked : dislike in progress");
+    }
   }
 }

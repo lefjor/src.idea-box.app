@@ -14,6 +14,7 @@ import {IdeaStoreService} from './service/idea-store.service';
 import {CommentaryService} from './service/commentary.service';
 import {AuthService} from './service/auth.service';
 import {FileUploadService} from './service/file-upload.service';
+import {ReactionService} from './service/reaction.service';
 import {IdeaFormComponent} from './idea-form/idea-form.component';
 import {IdeaViewComponent} from './idea-view/idea-view.component';
 
@@ -63,7 +64,7 @@ export const firebaseConfig = {
     AngularFireDatabaseModule,
     AngularFireAuthModule
   ],
-  providers: [IdeaStoreService, CommentaryService, FileUploadService, AuthService, AuthGuard],
+  providers: [IdeaStoreService, CommentaryService, ReactionService, FileUploadService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

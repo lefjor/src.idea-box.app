@@ -12,7 +12,7 @@ import {Observable} from "rxjs";
 })
 export class IdeaListComponent implements OnInit {
 
-  ideas : Observable<Idea[]>;
+  ideas:Observable<Idea[]>;
 
   constructor(private ideaStoreService:IdeaStoreService) {
   }

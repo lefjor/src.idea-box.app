@@ -1,0 +1,21 @@
+.reaction {
+  button {
+    color: #636c72;
+    font-weight: bold;
+    cursor: pointer;
+    &.active {
+      color: rgb(88, 144, 255);
+    }
+    i {
+      font-weight: bold;
+    }
+    span {
+      padding-left: 5px;
+    }
+  }
+}
+
+.card-footer-fake {
+  border-top: none;
+  background-color: transparent;
+}

@@ -14,21 +14,24 @@
               [disabled]="!linkEnabled ? true : null"><i class="octicon octicon-trashcan"></i> Effacer l'idée
       </button>
     </div>-->
-
-  <div class="text-center">
-    <div class="btn-group" role="group" aria-label="Menu d'une idée">
-      <a href="" [routerLink]="['/idea-detail',idea.$key]" class="btn btn-secondary"
-         [class.disabled]="!linkEnabled ? true : null" [attr.tabindex]="!linkEnabled ? -1 : null"><i
-        class="octicon octicon-search"></i></a>
-      <a href="" [routerLink]="['/idea-form',idea.$key]" class="btn btn-secondary"
-         [class.disabled]="!linkEnabled ? true : null" [attr.tabindex]="!linkEnabled ? -1 : null"><i
-        class="octicon octicon-pencil"></i></a>
-      <button type="button" class="btn btn-secondary btn-" (click)="open(content)"
-              [disabled]="!linkEnabled ? true : null" [attr.tabindex]="!linkEnabled ? -1 : null"><i
-        class="octicon octicon-trashcan"></i></button>
-    </div>
+</div>
+<div class="card-footer card-footer-fake text-center">
+  <div class="btn-group" role="group" aria-label="Menu d'une idée">
+    <a href="" [routerLink]="['/idea-detail',idea.$key]" class="btn btn-secondary"
+       [class.disabled]="!linkEnabled ? true : null" [attr.tabindex]="!linkEnabled ? -1 : null"><i
+      class="octicon octicon-search"></i></a>
+    <a href="" [routerLink]="['/idea-form',idea.$key]" class="btn btn-secondary"
+       [class.disabled]="!linkEnabled ? true : null" [attr.tabindex]="!linkEnabled ? -1 : null"><i
+      class="octicon octicon-pencil"></i></a>
+    <button type="button" class="btn btn-secondary btn-" (click)="open(content)"
+            [disabled]="!linkEnabled ? true : null" [attr.tabindex]="!linkEnabled ? -1 : null"><i
+      class="octicon octicon-trashcan"></i></button>
   </div>
-
+</div>
+<div class="card-footer card-footer-fake text-center">
+  <span class="reaction">
+    <button type="button" class="btn btn-link" [class.active]="alreadyLiked" (click)="thumbsUp()"><i class="octicon octicon-thumbsup"></i><span>J'aime ({{likeNumber}})</span></button>
+  </span>
 </div>
 <div class="card-footer text-center">
   <small class="text-muted">{{idea.lastModified | date : 'dd/MM/yyyy à HH:mm'}}</small>
