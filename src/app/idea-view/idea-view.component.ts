@@ -20,6 +20,7 @@ export class IdeaViewComponent implements OnInit {
   userEmail:string;
   alreadyLiked:boolean = false;
   likeNumber:number = 0;
+  reactionKey : string;
 
   constructor(private router:Router, private modalService:NgbModal, private ideaStoreService:IdeaStoreService, private authService:AuthService, private reactionService:ReactionService) {
   }
@@ -29,10 +30,13 @@ export class IdeaViewComponent implements OnInit {
       this.userEmail = this.authService.getEmail();
       this.reactionService.getAllReactions("thumbsup", this.idea.$key).subscribe((snapshots:Array<Object>) => {
         this.likeNumber = 0;
+        this.reactionKey = "";
+        this.alreadyLiked = false;
         snapshots.forEach(snapshot => {
           this.likeNumber++;
           if (snapshot["$value"] === this.userEmail) {
             this.alreadyLiked = true;
+            this.reactionKey = snapshot["$key"];
           }
         });
       })
@@ -58,7 +62,7 @@ export class IdeaViewComponent implements OnInit {
     if (!this.alreadyLiked) {
       this.reactionService.addReaction(this.idea.$key, this.userEmail);
     } else {
-      console.log("Already liked : dislike in progress");
+      this.reactionService.deleteReaction(this.idea.$key, this.reactionKey);
     }
   }
 }

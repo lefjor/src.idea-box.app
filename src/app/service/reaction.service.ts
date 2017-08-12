@@ -11,7 +11,7 @@ export class ReactionService {
   private thumbsupReaction:FirebaseListObservable<any>;
 
   constructor(private af:AngularFireDatabase) {
-    this.thumbsupReaction = this.af.list('/reactions/thumbsup/', { preserveSnapshot: true});
+    this.thumbsupReaction = this.af.list('/reactions/thumbsup/', {preserveSnapshot: true});
   }
 
   public getAllThumbsUp():FirebaseListObservable<any> {
@@ -23,6 +23,10 @@ export class ReactionService {
   }
 
   public getAllReactions(reactionType:string, ideaKey:string):FirebaseListObservable<any> {
-   return this.af.list('/reactions/' + reactionType + '/' + ideaKey + '/');
+    return this.af.list('/reactions/' + reactionType + '/' + ideaKey + '/');
+  }
+
+  public deleteReaction(ideaKey:string, reactionKey:string):firebase.Promise<void> {
+    return this.af.list('/reactions/thumbsup/' + ideaKey).remove(reactionKey);
   }
 }
