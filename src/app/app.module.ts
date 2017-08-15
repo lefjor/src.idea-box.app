@@ -30,15 +30,7 @@ import { CommentaryViewComponent } from './commentary/commentary-view/commentary
 import { CommentaryListComponent } from './commentary/commentary-list/commentary-list.component';
 import { SignupFormComponent } from './signup-form/signup-form.component';
 
-// Initialize Firebase
-export const firebaseConfig = {
-  apiKey: "AIzaSyAdtqf6iHjXNc_GVMXmTKBeg60BQqHVNik",
-  authDomain: "idea-box-f3b21.firebaseapp.com",
-  databaseURL: "https://idea-box-f3b21.firebaseio.com",
-  projectId: "idea-box-f3b21",
-  storageBucket: "idea-box-f3b21.appspot.com",
-  messagingSenderId: "621492012579"
-};
+import {environment} from '../environments/environment';
 
 
 @NgModule({
@@ -60,7 +52,7 @@ export const firebaseConfig = {
     HttpModule,
     NgbModule.forRoot(),
     RouterModule.forRoot(ROUTES/*, { enableTracing: true }*/),
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule
   ],
