@@ -21,6 +21,7 @@ export class IdeaViewComponent implements OnInit {
   alreadyLiked:boolean = false;
   likeNumber:number = 0;
   reactionKey : string;
+  modificationAuthorized : boolean = false;
 
   constructor(private router:Router, private modalService:NgbModal, private ideaStoreService:IdeaStoreService, private authService:AuthService, private reactionService:ReactionService) {
   }
@@ -28,6 +29,9 @@ export class IdeaViewComponent implements OnInit {
   ngOnInit() {
     this.authService.authState$.subscribe(() => {
       this.userEmail = this.authService.getEmail();
+      if(this.userEmail === this.idea.userId) {
+        this.modificationAuthorized = true;
+      }
       this.reactionService.getAllReactions("thumbsup", this.idea.$key).subscribe((snapshots:Array<Object>) => {
         this.likeNumber = 0;
         this.reactionKey = "";

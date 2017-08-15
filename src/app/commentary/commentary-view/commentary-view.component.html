@@ -5,11 +5,11 @@
     <span class="main-comment">{{commentary.value}}</span>
   </p>
   <p class="comment-tools">
-    <span class="link" (click)="updateCommentary()">Modifier</span>
-    <span class="caracteristic"> · </span>
-    <span class="link" (click)="deleteCommentary()">Supprimer</span>
-    <span class="caracteristic">{{commentary.interval}}</span>
-    <span class="caracteristic"> · </span>
+    <span *ngIf="modificationAuthorized" class="link" (click)="updateCommentary()">Modifier</span>
+    <span *ngIf="modificationAuthorized" class="caracteristic"> · </span>
+    <span *ngIf="modificationAuthorized" class="link" (click)="deleteCommentary()">Supprimer</span>
+    <span *ngIf="modificationAuthorized" class="caracteristic">{{commentary.interval}}</span>
+    <span *ngIf="modificationAuthorized" class="caracteristic"> · </span>
     <span class="caracteristic">{{commentary.lastModified | date : 'dd/MM/yyyy à HH:mm'}}</span>
   </p>
 </div>

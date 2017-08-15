@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import {AuthService} from '../../service/auth.service';
 
 import {Commentary} from '../../model/commentary';
 
@@ -10,11 +11,16 @@ import {Commentary} from '../../model/commentary';
 export class CommentaryViewComponent implements OnInit {
 
   @Input() commentary : Commentary;
+  modificationAuthorized : boolean = false;
 
-  constructor() { }
+  constructor(private authService : AuthService) { }
 
   ngOnInit() {
-
+    this.authService.authState$.subscribe(() => {
+      if(this.authService.getEmail() === this.commentary.userId) {
+        this.modificationAuthorized = true;
+      }
+    })
   }
 
   public deleteCommentary() : void {

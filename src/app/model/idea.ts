@@ -5,4 +5,5 @@ export class Idea {
   longDescription : string;
   imageSrc : string;
   lastModified : number;
+  userId : string;
 }

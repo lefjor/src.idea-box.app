@@ -1,36 +1,29 @@
 <img *ngIf="idea.imageSrc" class="card-img-top img-fluid" [src]="idea.imageSrc" alt="Card image cap">
-<h4 class="card-header text-center">{{idea.title}}</h4>
+<h4 class="card-header text-center">
+  <a *ngIf="linkEnabled; else noLink" href="" [routerLink]="['/idea-detail',idea.$key]">{{idea.title}}</a>
+  <ng-template #noLink><a href=""
+                  [attr.tabindex]="!linkEnabled ? -1 : null">{{idea.title}}</a></ng-template>
+</h4>
 <div class="card-block">
   <p class="card-text text-center font-italic">{{idea.shortDescription | slice:0:125}}<span
     *ngIf="idea.shortDescription && idea.shortDescription.length > 125">[...]</span></p>
-
-  <!--  <div class="text-center">
-      <a href="" [routerLink]="['/idea-detail',idea.$key]" class="btn btn-primary mb-3"
-         [class.disabled]="!linkEnabled ? true : null"><i class="octicon octicon-search"></i> Voir le détail de l'idée
-      </a>
-      <a href="" [routerLink]="['/idea-form',idea.$key]" class="btn btn-warning mb-3"
-         [class.disabled]="!linkEnabled ? true : null"><i class="octicon octicon-pencil"></i> Modifier l'idée</a>
-      <button type="button" class="btn btn-danger mb-3" (click)="open(content)"
-              [disabled]="!linkEnabled ? true : null"><i class="octicon octicon-trashcan"></i> Effacer l'idée
-      </button>
-    </div>-->
 </div>
-<div class="card-footer card-footer-fake text-center">
+<div *ngIf="modificationAuthorized || !linkEnabled" class="card-footer card-footer-fake text-center">
   <div class="btn-group" role="group" aria-label="Menu d'une idée">
-    <a href="" [routerLink]="['/idea-detail',idea.$key]" class="btn btn-secondary"
-       [class.disabled]="!linkEnabled ? true : null" [attr.tabindex]="!linkEnabled ? -1 : null"><i
-      class="octicon octicon-search"></i></a>
-    <a href="" [routerLink]="['/idea-form',idea.$key]" class="btn btn-secondary"
+    <a href="" [routerLink]="['/idea-form',idea.$key]"
+       class="btn btn-secondary"
        [class.disabled]="!linkEnabled ? true : null" [attr.tabindex]="!linkEnabled ? -1 : null"><i
       class="octicon octicon-pencil"></i></a>
-    <button type="button" class="btn btn-secondary btn-" (click)="open(content)"
+    <button type="button" class="btn btn-secondary btn-"
+            (click)="open(content)"
             [disabled]="!linkEnabled ? true : null" [attr.tabindex]="!linkEnabled ? -1 : null"><i
       class="octicon octicon-trashcan"></i></button>
   </div>
 </div>
 <div class="card-footer card-footer-fake text-center">
   <span class="reaction">
-    <button type="button" class="btn btn-link" [class.active]="alreadyLiked" (click)="thumbsUp()"><i class="octicon octicon-thumbsup"></i><span>J'aime ({{likeNumber}})</span></button>
+    <button type="button" class="btn btn-link not-focusable" [class.actived]="alreadyLiked" (click)="thumbsUp()"><i
+      class="octicon octicon-thumbsup"></i><span>J'aime ({{likeNumber}})</span></button>
   </span>
 </div>
 <div class="card-footer text-center">
