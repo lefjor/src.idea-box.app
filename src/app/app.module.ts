@@ -6,30 +6,36 @@ import { RouterModule} from '@angular/router';
 
 import {ROUTES} from './app.routes';
 
+// COMPONENT
 import {AppComponent } from './app.component';
-import {IdeaListComponent } from './idea-list/idea-list.component';
-import {IdeaDetailComponent} from './idea-detail/idea-detail.component';
+// idea
+import {IdeaDetailComponent} from './idea/idea-detail/idea-detail.component';
+import {IdeaFormComponent} from './idea/idea-form/idea-form.component';
+import {IdeaListComponent } from './idea/idea-list/idea-list.component';
+import {IdeaViewComponent} from './idea/idea-view/idea-view.component';
+// commentary
+import { CommentaryFormComponent } from './commentary/commentary-form/commentary-form.component';
+import { CommentaryViewComponent } from './commentary/commentary-view/commentary-view.component';
+import { CommentaryListComponent } from './commentary/commentary-list/commentary-list.component';
+// connexion
+import { LoginFormComponent } from './connexion/login-form/login-form.component';
+import { SignupFormComponent } from './connexion/signup-form/signup-form.component';
 
+// SERVICE
 import {IdeaStoreService} from './service/idea-store.service';
 import {CommentaryService} from './service/commentary.service';
 import {AuthService} from './service/auth.service';
 import {FileUploadService} from './service/file-upload.service';
 import {ReactionService} from './service/reaction.service';
-import {IdeaFormComponent} from './idea-form/idea-form.component';
-import {IdeaViewComponent} from './idea-view/idea-view.component';
 
+// GUARD
+import { AuthGuard} from './service/guard/auth.guard';
+
+// UTILS
 import {AngularFireModule} from 'angularfire2';
 import {AngularFireDatabaseModule} from "angularfire2/database";
 import { AngularFireAuthModule } from 'angularfire2/auth';
-import { LoginFormComponent } from './login-form/login-form.component';
-import { AuthGuard} from './service/guard/auth.guard';
-
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { CommentaryFormComponent } from './commentary/commentary-form/commentary-form.component';
-import { CommentaryViewComponent } from './commentary/commentary-view/commentary-view.component';
-import { CommentaryListComponent } from './commentary/commentary-list/commentary-list.component';
-import { SignupFormComponent } from './signup-form/signup-form.component';
-
 import {environment} from '../environments/environment';
 
 

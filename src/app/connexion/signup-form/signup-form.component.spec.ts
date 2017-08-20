@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SignupFormComponent } from './signup-form.component';
+import { SignupFormComponent } from './signup-form.component.ts';
 
 describe('SignupFormComponent', () => {
   let component: SignupFormComponent;

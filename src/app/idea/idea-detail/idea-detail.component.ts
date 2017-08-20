@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {BehaviorSubject, Observable} from "rxjs";
 
-import {AuthService} from '../service/auth.service';
-import {IdeaStoreService} from '../service/idea-store.service';
-import {Idea} from '../model/idea';
+import {AuthService} from '../../service/auth.service';
+import {IdeaStoreService} from '../../service/idea-store.service';
+import {Idea} from '../../model/idea';
 
 @Component({
   selector: 'app-idea-detail',

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 
-import { Idea} from '../model/idea';
-import {IdeaStoreService} from '../service/idea-store.service';
-import {FileUploadService} from '../service/file-upload.service';
+import { Idea} from '../../model/idea';
+import {IdeaStoreService} from '../../service/idea-store.service';
+import {FileUploadService} from '../../service/file-upload.service';
 
 @Component({
   selector: 'app-idea-form',

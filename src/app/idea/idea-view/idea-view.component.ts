@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {Router} from '@angular/router';
 
-import {Idea} from '../model/idea';
-import {IdeaStoreService} from '../service/idea-store.service';
-import {AuthService} from '../service/auth.service';
-import {ReactionService} from '../service/reaction.service';
+import {Idea} from '../../model/idea';
+import {IdeaStoreService} from '../../service/idea-store.service';
+import {AuthService} from '../../service/auth.service';
+import {ReactionService} from '../../service/reaction.service';
 
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 

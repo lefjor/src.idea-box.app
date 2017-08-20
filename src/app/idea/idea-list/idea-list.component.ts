@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {IdeaStoreService} from '../service/idea-store.service';
+import {IdeaStoreService} from '../../service/idea-store.service';
 
-import {Idea} from '../model/idea';
+import {Idea} from '../../model/idea';
 
 import {Observable} from "rxjs";
 
