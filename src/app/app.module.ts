@@ -14,6 +14,7 @@ import {IdeaStoreService} from './service/idea-store.service';
 import {CommentaryService} from './service/commentary.service';
 import {AuthService} from './service/auth.service';
 import {FileUploadService} from './service/file-upload.service';
+import {AnalyticsEventsService} from './service/analytics/analytics-events.service';
 import {ReactionService} from './service/reaction.service';
 import {IdeaFormComponent} from './idea-form/idea-form.component';
 import {IdeaViewComponent} from './idea-view/idea-view.component';

@@ -1,10 +1,10 @@
-<img *ngIf="idea.imageSrc" class="card-img-top img-fluid" [src]="idea.imageSrc" alt="Card image cap">
+<img *ngIf="idea.imageSrc" class="card-img-top mx-auto d-block img-fluid" [src]="idea.imageSrc" alt="Card image cap">
 <h4 class="card-header text-center">
   <a *ngIf="linkEnabled; else noLink" href="" [routerLink]="['/idea-detail',idea.$key]">{{idea.title}}</a>
   <ng-template #noLink><a href=""
                   [attr.tabindex]="!linkEnabled ? -1 : null">{{idea.title}}</a></ng-template>
 </h4>
-<div class="card-block">
+<div class="card-body">
   <p class="card-text text-center font-italic">{{idea.shortDescription | slice:0:125}}<span
     *ngIf="idea.shortDescription && idea.shortDescription.length > 125">[...]</span></p>
 </div>

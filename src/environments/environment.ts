@@ -5,6 +5,7 @@
 
 export const environment = {
   production: false,
+  showBreakingPoints : true,
   // Initialize Firebase
   firebaseConfig: {
     apiKey: "AIzaSyAdtqf6iHjXNc_GVMXmTKBeg60BQqHVNik",

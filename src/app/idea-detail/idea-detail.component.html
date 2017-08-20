@@ -1,29 +1,28 @@
 <div *ngIf="idea | async as ideaModel">
-  <div class="card-deck px-3">
-    <div class="card text-center mb-3">
-      <div *ngIf="ideaModel.imageSrc" class="card-header">
-        <img class="card-img-top img-fluid" [src]="ideaModel.imageSrc" alt="Card image cap">
-      </div>
-      <div class="card-block">
-        <h4 class="card-title">{{ideaModel.title}}</h4>
+  <div class="card text-center mb-3">
+    <img *ngIf="ideaModel.imageSrc" class="card-img-top img-fluid" [src]="ideaModel.imageSrc" alt="Card image cap">
+    <div class="card-body">
+      <h4 class="card-title">{{ideaModel.title}}</h4>
 
-        <p class="card-text font-italic">{{ideaModel.shortDescription}}</p>
+      <p class="card-text font-italic">{{ideaModel.shortDescription}}</p>
 
-        <p class="card-text">{{ideaModel.longDescription}}</p>
+      <p class="card-text">{{ideaModel.longDescription}}</p>
 
-      </div>
-      <div class="card-footer text-muted text-center">
-        {{ideaModel.lastModified | date : 'dd/MM/yyyy à HH:mm'}}
-      </div>
+    </div>
+    <div class="card-footer text-muted text-center">
+      {{ideaModel.lastModified | date : 'dd/MM/yyyy à HH:mm'}}
     </div>
   </div>
-  <app-commentary-list [idea]="idea"></app-commentary-list>
-  <div class="text-center">
-    <a href="" routerLink="/idea-list" class="btn btn-primary mb-3"><i class="octicon octicon-three-bars"></i> Retour à la liste</a>
-    <a *ngIf="modificationAuthorized" href="" [routerLink]="['/idea-form',ideaModel.$key]" class="btn btn-warning mb-3"><i class="octicon octicon-pencil"></i> Modifier l'idée</a>
-    <!--<button type="button" class="btn btn-danger mb-3" (click)="navigateToModication(idea)">Effacer l'idée</button>-->
-  </div>
 </div>
+<app-commentary-list [idea]="idea"></app-commentary-list>
+<div class="text-center">
+  <a href="" routerLink="/idea-list" class="btn btn-primary mb-3"><i class="octicon octicon-three-bars"></i> Retour à la
+    liste</a>
+  <a *ngIf="modificationAuthorized" href="" [routerLink]="['/idea-form',ideaModel.$key]" class="btn btn-warning mb-3"><i
+    class="octicon octicon-pencil"></i> Modifier l'idée</a>
+  <!--<button type="button" class="btn btn-danger mb-3" (click)="navigateToModication(idea)">Effacer l'idée</button>-->
+</div>
+
 
 
 
