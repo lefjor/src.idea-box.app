@@ -6,6 +6,15 @@
 export const environment = {
   production: false,
   showBreakingPoints : true,
+  trelloConfig: {
+    urlApi : "https://trello.com/1/authorize?expiration=never&name=SinglePurposeToken&key=54955f36af559c6294ec4be6dc6da239",
+    cards : {
+      postCards : "https://api.trello.com/1/cards?idList=##idList##"
+    },
+    lists : {
+      getLists : ""
+    }
+  },
   // Initialize Firebase
   firebaseConfig: {
     apiKey: "AIzaSyAdtqf6iHjXNc_GVMXmTKBeg60BQqHVNik",

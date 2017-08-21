@@ -20,6 +20,8 @@ import { CommentaryListComponent } from './commentary/commentary-list/commentary
 // connexion
 import { LoginFormComponent } from './connexion/login-form/login-form.component';
 import { SignupFormComponent } from './connexion/signup-form/signup-form.component';
+// bug
+import { BugFormComponent } from './bug/bug-form/bug-form.component';
 
 // SERVICE
 import {IdeaStoreService} from './service/idea-store.service';
@@ -38,7 +40,6 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {environment} from '../environments/environment';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +52,7 @@ import {environment} from '../environments/environment';
     CommentaryViewComponent,
     CommentaryListComponent,
     SignupFormComponent,
+    BugFormComponent,
   ],
   imports: [
     BrowserModule,

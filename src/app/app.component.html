@@ -6,27 +6,33 @@
   <div class="device-xl d-none d-xl-block">XL</div>
 </div>
 
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+<nav *ngIf="authService.authState$ | async; else appTitle"
+     class="navbar sticky-top navbar-expand-md navbar-dark bg-dark mb-3">
   <button class="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse"
           data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
           aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a class="navbar-brand" href="#">&nbsp;</a>
+  <a class="navbar-brand pr-md-3" href="" routerLink="/idea-list"><i class="octicon octicon-light-bulb"></i> Idea Box</a>
 
-  <div *ngIf="authService.authState$ | async" class="collapse navbar-collapse" id="navbarTogglerDemo02">
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-2 mt-sm-0">
-      <li class="nav-item" [class.active]="routeIdea.isActive">
-        <a class="nav-link" href="" routerLink="/idea-list" routerLinkActive #routeIdea="routerLinkActive"><i
-          class="octicon octicon-three-bars"></i> Idées passées</a>
-      </li>
+      <!--    <li class="nav-item" [class.active]="routeIdea.isActive">
+            <a class="nav-link" href="" routerLink="/idea-list" routerLinkActive #routeIdea="routerLinkActive"><i
+              class="octicon octicon-three-bars"></i> Idées passées</a>
+          </li>-->
       <li class="nav-item" [class.active]="routeForm.isActive">
         <a class="nav-link" href="" routerLink="/idea-form" routerLinkActive #routeForm="routerLinkActive"><i
           class="octicon octicon-plus"></i> Ajouter ma pierre à l'édifice</a>
       </li>
+      <li class="nav-item" [class.active]="routeBug.isActive">
+        <a class="nav-link" href="" routerLink="/bug-form" routerLinkActive #routeBug="routerLinkActive"><i
+          class="octicon octicon-bug"></i> Un bug ?</a>
+      </li>
     </ul>
-    <span class="navbar-text"><a class="link-nav" href="" (click)="logout()"><i class="octicon octicon-x"></i>
-      Déconnexion</a></span>
+    <span class="navbar-text">
+      <a class="link-nav" href="" (click)="logout()"><i class="octicon octicon-x"></i> Déconnexion</a>
+    </span>
     <!--<form class="form-inline my-2 my-md-0" (ngSubmit)="rechercher()">
       <input class="form-control mr-sm-2" type="text" placeholder="Rechercher">
       <button class="btn btn-primary my-2 my-sm-0" type="submit">Rechercher</button>
@@ -34,14 +40,16 @@
   </div>
 </nav>
 
-<div class="title">
-  <h1 class="title-h1 pt-3 pb-2">Idea Box</h1>
+<ng-template #appTitle>
+  <div class="title">
+    <h1 class="title-h1 pt-3 pb-2">Idea Box</h1>
 
-  <!--<div class="mx-auto logo py-2" style="width: 200px;">
-    <img class="title-logo" src="../assets/img/logo.png"/>
-  </div>-->
-  <!--<h2 class="title-h2 py-2 hidden-sm-down">Soumettre une idée en toute simplicité :)</h2>-->
-</div>
+    <!--<div class="mx-auto logo py-2" style="width: 200px;">
+      <img class="title-logo" src="../assets/img/logo.png"/>
+    </div>-->
+    <!--<h2 class="title-h2 py-2 hidden-sm-down">Soumettre une idée en toute simplicité :)</h2>-->
+  </div>
+</ng-template>
 
 <div class="container-fluid">
   <router-outlet></router-outlet>
