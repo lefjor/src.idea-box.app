@@ -5,6 +5,7 @@ import {environment} from "../../../environments/environment";
 import {Idea} from '../../model/idea';
 import {IdeaStoreService} from '../../service/idea-store.service';
 import {FileUploadService} from '../../service/file-upload.service';
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-idea-form',
@@ -16,10 +17,11 @@ export class IdeaFormComponent implements OnInit {
   idea: Idea = new Idea();
 
   alertDisplay: boolean = false;
+  inProgress: boolean = false;
 
   isModification: boolean = false;
 
-  constructor(private route: ActivatedRoute, private ideaStoreService: IdeaStoreService, private fileUploadService: FileUploadService) {
+  constructor(private route: ActivatedRoute, private ideaStoreService: IdeaStoreService, private fileUploadService: FileUploadService, private authService: AuthService) {
   }
 
   ngOnInit() {
@@ -36,13 +38,16 @@ export class IdeaFormComponent implements OnInit {
           }
           this.idea = data.idea;
           this.isModification = true;
-          this.idea.lastModified = new Date().getTime();
         } else {
           if (!environment.production) {
             console.log("Mode : add");
           }
-          this.idea.lastModified = new Date().getTime();
+          this.authService.authState$.subscribe(() => {
+            this.idea.userId = this.authService.getEmail();
+          })
         }
+        // Set the time for preview mode
+        this.idea.lastModified = new Date().getTime();
       });
   }
 
@@ -56,11 +61,13 @@ export class IdeaFormComponent implements OnInit {
       console.log("IdeaFormComponent : validateForm");
     }
 
+    // Set the right time for last modified
     this.idea.lastModified = new Date().getTime();
-
-    let files: FileList = (<HTMLInputElement>document.getElementById('imageInputFile')).files;
+    // Display loading bar
+    this.inProgress = true;
 
     // Uploading files
+    let files: FileList = (<HTMLInputElement>document.getElementById('imageInputFile')).files;
     if (files.length > 0) {
       this.fileUploadService.upload((<HTMLInputElement>document.getElementById('imageInputFile')).files).then((urlImage: string) => {
         this.idea.imageSrc = urlImage;
@@ -95,5 +102,10 @@ export class IdeaFormComponent implements OnInit {
     this.alertDisplay = true;
     // Initialisation of a new idea
     this.idea = new Idea();
+    // Erase for file input
+    let inputFile = <HTMLInputElement>document.getElementById('imageInputFile');
+    inputFile.value = '';
+    // Do not display loading bar anymore
+    this.inProgress = false;
   }
 }

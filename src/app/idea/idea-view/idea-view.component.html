@@ -22,8 +22,9 @@
 </div>
 <div class="card-footer card-footer-fake text-center">
   <span class="reaction">
-    <button type="button" class="btn btn-link not-focusable" [class.actived]="alreadyLiked" (click)="thumbsUp()"><i
-      class="octicon octicon-thumbsup"></i><span>J'aime ({{likeNumber}})</span></button>
+    <button type="button" class="btn btn-link not-focusable" [class.actived]="alreadyLiked" (click)="thumbsUp()"
+            [disabled]="!linkEnabled ? true : null" [attr.tabindex]="!linkEnabled ? -1 : null">
+      <i class="octicon octicon-thumbsup"></i><span>J'aime ({{likeNumber}})</span></button>
   </span>
 </div>
 <div class="card-footer text-center">
