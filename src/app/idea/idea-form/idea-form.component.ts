@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {environment} from "../../../environments/environment";
 
-import { Idea} from '../../model/idea';
+import {Idea} from '../../model/idea';
 import {IdeaStoreService} from '../../service/idea-store.service';
 import {FileUploadService} from '../../service/file-upload.service';
 
@@ -12,30 +13,37 @@ import {FileUploadService} from '../../service/file-upload.service';
 })
 export class IdeaFormComponent implements OnInit {
 
-  idea:Idea = new Idea();
+  idea: Idea = new Idea();
 
-  alertDisplay:boolean = false;
+  alertDisplay: boolean = false;
 
-  isModification:boolean = false;
+  isModification: boolean = false;
 
-  constructor(private route:ActivatedRoute, private ideaStoreService:IdeaStoreService, private fileUploadService:FileUploadService) {
+  constructor(private route: ActivatedRoute, private ideaStoreService: IdeaStoreService, private fileUploadService: FileUploadService) {
   }
 
   ngOnInit() {
-    console.log("IdeaFormComponent : ngOnInit");
-    const ideaId:string = this.route.snapshot.paramMap.get('ideaId');
-    if (ideaId) {
-      console.log("Mode : modification");
-      this.ideaStoreService.getIdea(ideaId).subscribe(idea => {
-        this.idea = idea;
-        this.idea.lastModified = new Date().getTime();
-      });
-      this.isModification = true;
-    } else {
-      console.log("Mode : add");
-      this.idea.lastModified = new Date().getTime();
+    if (!environment.production) {
+      console.log("IdeaFormComponent : ngOnInit");
     }
 
+    this.route.data
+      .subscribe((data: {idea: Idea}) => {
+        //console.log(data.idea);
+        if (data.idea) {
+          if (!environment.production) {
+            console.log("Mode : modification");
+          }
+          this.idea = data.idea;
+          this.isModification = true;
+          this.idea.lastModified = new Date().getTime();
+        } else {
+          if (!environment.production) {
+            console.log("Mode : add");
+          }
+          this.idea.lastModified = new Date().getTime();
+        }
+      });
   }
 
   /*public fileChanged(event : any):void {
@@ -43,16 +51,18 @@ export class IdeaFormComponent implements OnInit {
    }*/
 
 
-  public validateForm():void {
-    console.log("IdeaFormComponent : validateForm");
+  public validateForm(): void {
+    if (!environment.production) {
+      console.log("IdeaFormComponent : validateForm");
+    }
 
     this.idea.lastModified = new Date().getTime();
 
-    let files:FileList = (<HTMLInputElement>document.getElementById('imageInputFile')).files;
+    let files: FileList = (<HTMLInputElement>document.getElementById('imageInputFile')).files;
 
     // Uploading files
     if (files.length > 0) {
-      this.fileUploadService.upload((<HTMLInputElement>document.getElementById('imageInputFile')).files).then((urlImage:string) => {
+      this.fileUploadService.upload((<HTMLInputElement>document.getElementById('imageInputFile')).files).then((urlImage: string) => {
         this.idea.imageSrc = urlImage;
         this.ideaProcess();
       });
@@ -61,23 +71,27 @@ export class IdeaFormComponent implements OnInit {
     }
   }
 
-  private ideaProcess():void {
+  private ideaProcess(): void {
     if (this.isModification) {
       this.ideaStoreService.updateIdea(this.idea).then(() => {
         this.afterIdeaSubmission();
       }).catch(error => {
-        console.log(error);
+        if (!environment.production) {
+          console.log(error);
+        }
       });
     } else {
       this.ideaStoreService.addIdea(this.idea).then(() => {
         this.afterIdeaSubmission();
       }).catch(error => {
-        console.log(error);
+        if (!environment.production) {
+          console.log(error);
+        }
       });
     }
   }
 
-  private afterIdeaSubmission():void {
+  private afterIdeaSubmission(): void {
     this.alertDisplay = true;
     // Initialisation of a new idea
     this.idea = new Idea();

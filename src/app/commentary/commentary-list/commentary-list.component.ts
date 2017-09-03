@@ -12,16 +12,15 @@ import {CommentaryService} from '../../service/commentary.service';
   styleUrls: ['./commentary-list.component.scss']
 })
 export class CommentaryListComponent implements OnInit {
-  @Input() idea:Observable<Idea>;
+  @Input() idea: Idea;
 
   comments: Observable<Commentary[]>;
 
-  constructor(private commentaryService : CommentaryService) { }
+  constructor(private commentaryService: CommentaryService) {
+  }
 
   ngOnInit() {
-    this.idea.subscribe((idea : Idea) => {
-      this.comments = this.commentaryService.getCommentariesByIdeaKey(idea.$key);
-    });
+    this.comments = this.commentaryService.getCommentariesByIdeaKey(this.idea.$key);
 
     //this.comments = this.commentaryService.getCommentariesByIdeaKey(this.idea.$key);
     //this.commentaryService.getCommentariesByIdeaKey(this.idea.$key).subscribe(test => console.log(test));

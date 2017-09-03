@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Idea} from '../model/idea';
+import {environment} from '../../environments/environment';
 
 import {BehaviorSubject, Observable} from "rxjs";
 
@@ -9,10 +10,12 @@ import * as firebase from 'firebase/app';
 
 @Injectable()
 export class IdeaStoreService {
-  private ideas:FirebaseListObservable<any[]>;
+  private ideas: FirebaseListObservable<any[]>;
 
-  constructor(private af:AngularFireDatabase) {
-    console.log("IdeaStoreService : constructor");
+  constructor(private af: AngularFireDatabase) {
+    if (!environment.production) {
+      console.log("IdeaStoreService : constructor");
+    }
     this.ideas = this.af.list('/ideas');
   }
 
@@ -20,20 +23,22 @@ export class IdeaStoreService {
     return this.ideas/*.asObservable()*/;
   }
 
-  public addIdea(newIdea:Idea):firebase.database.ThenableReference {
+  public addIdea(newIdea: Idea): firebase.database.ThenableReference {
     return this.ideas.push(newIdea);
   }
 
-  public getIdea(key:string):FirebaseObjectObservable<Idea> {
-    console.log("IdeaStoreService : getIdea : " + key);
+  public getIdea(key: string): FirebaseObjectObservable<Idea> {
+    if (!environment.production) {
+      console.log("IdeaStoreService : getIdea : [" + key + "]");
+    }
     return this.af.object(`/ideas/${key}`);
   }
 
-  public updateIdea(idea:Idea):firebase.Promise<void> {
+  public updateIdea(idea: Idea): firebase.Promise<void> {
     return this.af.object('/ideas/' + idea.$key).update(idea);
   }
 
-  public deleteIdea($key:string):firebase.Promise<void> {
+  public deleteIdea($key: string): firebase.Promise<void> {
     return this.af.object('/ideas/' + $key).remove();
   }
 }

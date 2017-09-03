@@ -1,4 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
+import {environment} from '../../../environments/environment';
+
 import {AuthService} from '../../service/auth.service';
 
 import {Commentary} from '../../model/commentary';
@@ -10,25 +12,30 @@ import {Commentary} from '../../model/commentary';
 })
 export class CommentaryViewComponent implements OnInit {
 
-  @Input() commentary : Commentary;
-  modificationAuthorized : boolean = false;
+  @Input() commentary: Commentary;
+  modificationAuthorized: boolean = false;
 
-  constructor(private authService : AuthService) { }
+  constructor(private authService: AuthService) {
+  }
 
   ngOnInit() {
     this.authService.authState$.subscribe(() => {
-      if(this.authService.getEmail() === this.commentary.userId) {
+      if (this.authService.getEmail() === this.commentary.userId) {
         this.modificationAuthorized = true;
       }
     })
   }
 
-  public deleteCommentary() : void {
-    console.log("deleteCommentary : not implemented");
+  public deleteCommentary(): void {
+    if (!environment.production) {
+      console.log("deleteCommentary : not implemented");
+    }
   }
 
-  public updateCommentary() : void {
-    console.log("deleteCommentary : not implemented");
+  public updateCommentary(): void {
+    if (!environment.production) {
+      console.log("deleteCommentary : not implemented");
+    }
   }
 
 }

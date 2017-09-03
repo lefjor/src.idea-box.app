@@ -7,13 +7,25 @@ import {LoginFormComponent} from './connexion/login-form/login-form.component';
 import {SignupFormComponent} from './connexion/signup-form/signup-form.component';
 import {BugFormComponent} from './bug/bug-form/bug-form.component';
 import {AuthGuard} from './service/guard/auth.guard';
+import {IdeaResolve} from './idea/idea.resolve';
 
 export const ROUTES:Routes = [
-  {path: '', component: LoginFormComponent},
+  {path: 'login', component: LoginFormComponent},
   {path: 'signup', component: SignupFormComponent},
-  {path: 'idea-form', component: IdeaFormComponent, canActivate: [AuthGuard]},
-  {path: 'idea-form/:ideaId', component: IdeaFormComponent, canActivate: [AuthGuard]},
-  {path: 'idea-detail/:ideaId', component: IdeaDetailComponent, canActivate: [AuthGuard]},
-  {path: 'idea-list', component: IdeaListComponent, canActivate: [AuthGuard]},
-  {path: 'bug-form', component: BugFormComponent, canActivate: [AuthGuard]}
+  {
+    path: '', /*canActivate: [AuthGuard],*/
+    children: [
+      {path: 'idea-form/:ideaId', component: IdeaFormComponent, resolve: {idea: IdeaResolve}},
+      {path: 'idea-form', component: IdeaFormComponent},
+      {path: 'idea-detail/:ideaId', component: IdeaDetailComponent, resolve: {idea: IdeaResolve}},
+      {path: 'idea-list', component: IdeaListComponent},
+      {path: 'bug-form', component: BugFormComponent}
+    ]
+  },
+  /*{path: '', redirectTo: 'idea-list', pathMatch: 'full'},
+   /*{
+   path: '**',
+   redirectTo: '/idea-list',
+   pathMatch: 'full'
+   }*/
 ];

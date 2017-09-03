@@ -13,7 +13,8 @@
           aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a class="navbar-brand pr-md-3" href="" routerLink="/idea-list"><i class="octicon octicon-light-bulb"></i> Idea Box</a>
+  <a class="navbar-brand pr-md-3" href="" routerLink="/idea-list"><i class="octicon octicon-light-bulb"></i> Idea
+    Box</a>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-2 mt-sm-0">
@@ -23,12 +24,12 @@
           </li>-->
       <li class="nav-item" [class.active]="routeForm.isActive">
         <a class="nav-link" href="" routerLink="/idea-form" routerLinkActive #routeForm="routerLinkActive"><i
-          class="octicon octicon-plus"></i> Ajouter ma pierre à l'édifice</a>
+          class="octicon octicon-plus"></i> Proposer une idée</a>
       </li>
-      <li class="nav-item" [class.active]="routeBug.isActive">
-        <a class="nav-link" href="" routerLink="/bug-form" routerLinkActive #routeBug="routerLinkActive"><i
-          class="octicon octicon-bug"></i> Un bug ?</a>
-      </li>
+      <!--      <li class="nav-item" [class.active]="routeBug.isActive">
+              <a class="nav-link" href="" routerLink="/bug-form" routerLinkActive #routeBug="routerLinkActive"><i
+                class="octicon octicon-bug"></i> Un bug ?</a>
+            </li>-->
     </ul>
     <span class="navbar-text">
       <a class="link-nav" href="" (click)="logout()"><i class="octicon octicon-x"></i> Déconnexion</a>
@@ -55,7 +56,18 @@
   <router-outlet></router-outlet>
 </div>
 
-
-
+<footer class="footer bg-dark mt-3">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <a href="" routerLink="/bug-form" class="mr-3"><i class="octicon octicon-bug"></i> Un bug ?</a>
+        <a href="" routerLink="/idea-list" class="mr-3"><i class="octicon octicon-book"></i> Mentions légales</a>
+        <!--<a target="_blank" href="https://github.com/lefjor/src.idea-box.app/blob/master/CHANGELOG.md"><i
+          class="octicon octicon-mark-github"></i> Changelog</a>-->
+        <a href="" routerLink="/idea-list"><i class="octicon octicon-mark-github"></i> Changelog</a>
+      </div>
+    </div>
+  </div>
+</footer>
 
 

@@ -23,6 +23,11 @@ import { SignupFormComponent } from './connexion/signup-form/signup-form.compone
 // bug
 import { BugFormComponent } from './bug/bug-form/bug-form.component';
 
+import {ParametersComponent} from './admin/parameters/parameters.component';
+
+// RESOLVER
+import {IdeaResolve} from './idea/idea.resolve';
+
 // SERVICE
 import {IdeaStoreService} from './service/idea-store.service';
 import {CommentaryService} from './service/commentary.service';
@@ -52,19 +57,19 @@ import {environment} from '../environments/environment';
     CommentaryViewComponent,
     CommentaryListComponent,
     SignupFormComponent,
-    BugFormComponent,
+    BugFormComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     NgbModule.forRoot(),
-    RouterModule.forRoot(ROUTES/*, { enableTracing: true }*/),
+    RouterModule.forRoot(ROUTES, {useHash: true, enableTracing: !environment.production}),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule
   ],
-  providers: [IdeaStoreService, CommentaryService, ReactionService, FileUploadService, AuthService, AuthGuard],
+  providers: [IdeaStoreService, CommentaryService, ReactionService, FileUploadService, AuthService, AuthGuard, IdeaResolve],
   bootstrap: [AppComponent]
 })
 export class AppModule {

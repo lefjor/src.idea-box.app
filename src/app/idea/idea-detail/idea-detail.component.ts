@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {BehaviorSubject, Observable} from "rxjs";
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, ParamMap} from '@angular/router';
+import {environment} from '../../../environments/environment';
+import {Observable} from "rxjs";
 
 import {AuthService} from '../../service/auth.service';
 import {IdeaStoreService} from '../../service/idea-store.service';
@@ -13,27 +14,27 @@ import {Idea} from '../../model/idea';
 })
 export class IdeaDetailComponent implements OnInit {
 
-  idea:Observable<Idea>;
-  modificationAuthorized:boolean = false;
+  idea: Idea;
+  modificationAuthorized: Observable<boolean> | boolean = false;
 
-  constructor(private route:ActivatedRoute, private authService:AuthService, private ideaStoreService:IdeaStoreService) {
+  constructor(private route: ActivatedRoute, private authService: AuthService, private ideaStoreService: IdeaStoreService) {
   }
 
   ngOnInit() {
-    console.log("IdeaDetailComponent : ngOnInit");
-    const ideaId:string = this.route.snapshot.paramMap.get('ideaId');
-    console.log("ideaId", ideaId);
-    this.idea = this.ideaStoreService.getIdea(ideaId);
-    this.idea.subscribe((idea : Idea) => {
-      this.authService.authState$.subscribe(() => {
-        if (this.authService.getEmail() === idea.userId) {
-          this.modificationAuthorized = true;
-        }
-      });
-    });
-    //this.ideaStoreService.getIdea(ideaId).subscribe(idea => console.log(idea));
-    //this.ideaStoreService.getIdea(ideaId).subscribe(idea => this.idea = idea);
+    if (!environment.production) {
+      console.log("IdeaDetailComponent : ngOnInit");
+    }
 
+    this.route.data
+      .subscribe((data: {idea: Idea}) => {
+        //console.log(data.idea);
+        this.idea = data.idea;
+        this.authService.authState$.subscribe(() => {
+          if (this.authService.getEmail() === data.idea.userId) {
+            this.modificationAuthorized = Observable.of(true);
+          }
+        });
+      })
+    ;
   }
-
 }

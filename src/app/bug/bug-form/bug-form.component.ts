@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {environment} from '../../../environments/environment';
 
 import {Bug} from '../../model/bug';
 
@@ -17,7 +18,9 @@ export class BugFormComponent implements OnInit {
   }
 
   public validateForm() : void {
-    console.log("validateForm : not implemented yet");
+    if (!environment.production) {
+      console.log("validateForm : not implemented yet");
+    }
   }
 
 }

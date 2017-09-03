@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {Router} from '@angular/router';
+import {environment} from "../../../environments/environment";
 
 import {Idea} from '../../model/idea';
 import {IdeaStoreService} from '../../service/idea-store.service';
@@ -53,9 +54,13 @@ export class IdeaViewComponent implements OnInit {
 
   public deleteIdea():void {
     this.ideaStoreService.deleteIdea(this.idea.$key).then(() => {
-      console.log("Delete idea : OK");
+      if (!environment.production) {
+        console.log("Delete idea : OK");
+      }
     }).catch((error => {
-      console.log(error)
+      if (!environment.production) {
+        console.log(error)
+      }
     }));
   }
 

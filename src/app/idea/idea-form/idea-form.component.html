@@ -32,9 +32,9 @@
       </div>
       <div class="form-group">
         <label for="longDescription">Description longue</label>
-          <textarea class="form-control" name="longDescription" id="longDescription"
-                    placeholder="Descrition de l'idée de génie" [(ngModel)]="idea.longDescription" minlength="5"
-                    required></textarea>
+        <textarea class="form-control" name="longDescription" id="longDescription"
+                  placeholder="Descrition de l'idée de génie" [(ngModel)]="idea.longDescription" minlength="5"
+                  required></textarea>
         <small id="longDescriptionHelp" class="form-text text-muted">Décriver au mieux votre idée.</small>
       </div>
       <div class="form-group">
@@ -43,6 +43,12 @@
                aria-describedby="fileHelp">
         <small id="fileHelp" class="form-text text-muted">Image descriptive</small>
       </div>
+      <!--      <div class="form-group">
+              <label class="custom-file">
+                <input type="file" id="file2" class="custom-file-input">
+                <span class="custom-file-control" data-content="Upload company logo..."></span>
+              </label>
+            </div>-->
       <button *ngIf="isModification; else update" type="submit" [disabled]="ideaForm.invalid" class="btn btn-primary">
         Modifier mon idée
       </button>
