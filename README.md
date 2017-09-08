@@ -1,5 +1,7 @@
 # IdeaBoxApp
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/lefjor/src.idea-box.app.svg)](https://greenkeeper.io/)
+
 ## Purpose
 
 ### Fonctional
