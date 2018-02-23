@@ -8,7 +8,7 @@ export class FileUploadService {
   constructor() {
   }
 
-  public upload(file: FileList): firebase.Promise<any> {
+  public upload(file: FileList): Promise<any> {
     // Create a root reference
     let storageRef = firebase.storage().ref();
 

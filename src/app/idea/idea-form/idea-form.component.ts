@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {environment} from "../../../environments/environment";
+import {environment} from '../../../environments/environment';
 
 import {Idea} from '../../model/idea';
 import {IdeaStoreService} from '../../service/idea-store.service';
 import {FileUploadService} from '../../service/file-upload.service';
-import {AuthService} from "../../service/auth.service";
+import {AuthService} from '../../service/auth.service';
 
 @Component({
   selector: 'app-idea-form',
@@ -21,7 +21,10 @@ export class IdeaFormComponent implements OnInit {
 
   isModification: boolean = false;
 
-  constructor(private route: ActivatedRoute, private ideaStoreService: IdeaStoreService, private fileUploadService: FileUploadService, private authService: AuthService) {
+  constructor(private route: ActivatedRoute,
+    private ideaStoreService: IdeaStoreService,
+    private fileUploadService: FileUploadService,
+    private authService: AuthService) {
   }
 
   ngOnInit() {
@@ -58,7 +61,7 @@ export class IdeaFormComponent implements OnInit {
 
   public validateForm(): void {
     if (!environment.production) {
-      console.log("IdeaFormComponent : validateForm");
+      console.log('IdeaFormComponent : validateForm');
     }
 
     // Set the right time for last modified
@@ -67,7 +70,7 @@ export class IdeaFormComponent implements OnInit {
     this.inProgress = true;
 
     // Uploading files
-    let files: FileList = (<HTMLInputElement>document.getElementById('imageInputFile')).files;
+    const files: FileList = (<HTMLInputElement>document.getElementById('imageInputFile')).files;
     if (files.length > 0) {
       this.fileUploadService.upload((<HTMLInputElement>document.getElementById('imageInputFile')).files).then((urlImage: string) => {
         this.idea.imageSrc = urlImage;
@@ -90,11 +93,11 @@ export class IdeaFormComponent implements OnInit {
     } else {
       this.ideaStoreService.addIdea(this.idea).then(() => {
         this.afterIdeaSubmission();
-      }).catch(error => {
+      })/*.catch(error => {
         if (!environment.production) {
           console.log(error);
         }
-      });
+      })*/;
     }
   }
 
@@ -103,7 +106,7 @@ export class IdeaFormComponent implements OnInit {
     // Initialisation of a new idea
     this.idea = new Idea();
     // Erase for file input
-    let inputFile = <HTMLInputElement>document.getElementById('imageInputFile');
+    const inputFile = <HTMLInputElement>document.getElementById('imageInputFile');
     inputFile.value = '';
     // Do not display loading bar anymore
     this.inProgress = false;

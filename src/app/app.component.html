@@ -13,7 +13,7 @@
           aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a class="navbar-brand pr-md-3" href="" routerLink="/idea-list"><i class="octicon octicon-light-bulb"></i> Idea
+  <a class="navbar-brand pr-md-3" href="" routerLink="/ideas"><i class="octicon octicon-light-bulb"></i> Idea
     Box</a>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
@@ -23,7 +23,7 @@
               class="octicon octicon-three-bars"></i> Idées passées</a>
           </li>-->
       <li class="nav-item" [class.active]="routeForm.isActive">
-        <a class="nav-link" href="" routerLink="/idea-form" routerLinkActive #routeForm="routerLinkActive"><i
+        <a class="nav-link" href="" routerLink="/ideas/add" routerLinkActive #routeForm="routerLinkActive"><i
           class="octicon octicon-plus"></i> Proposer une idée</a>
       </li>
       <!--      <li class="nav-item" [class.active]="routeBug.isActive">
@@ -60,11 +60,11 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col">
-        <a href="" routerLink="/bug-form" class="mr-3"><i class="octicon octicon-bug"></i> Un bug ?</a>
-        <a href="" routerLink="/idea-list" class="mr-3"><i class="octicon octicon-book"></i> Mentions légales</a>
+        <a href="" routerLink="/bugs/add" class="mr-3"><i class="octicon octicon-bug"></i> Un bug ?</a>
+        <a href="" routerLink="/ideas" class="mr-3"><i class="octicon octicon-book"></i> Mentions légales</a>
         <!--<a target="_blank" href="https://github.com/lefjor/src.idea-box.app/blob/master/CHANGELOG.md"><i
           class="octicon octicon-mark-github"></i> Changelog</a>-->
-        <a href="" routerLink="/idea-list"><i class="octicon octicon-mark-github"></i> Changelog</a>
+        <a href="" routerLink="/ideas"><i class="octicon octicon-mark-github"></i> Changelog</a>
       </div>
     </div>
   </div>

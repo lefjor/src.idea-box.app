@@ -1,44 +1,60 @@
-import {Injectable} from '@angular/core';
-import {Idea} from '../model/idea';
-import {environment} from '../../environments/environment';
+import { Injectable } from "@angular/core";
+import { Idea } from "../model/idea";
+import { environment } from "../../environments/environment";
 
-import {BehaviorSubject, Observable} from "rxjs";
+import { Observable } from "rxjs/Observable";
 
-import {AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
+import {
+  AngularFireDatabase,
+  AngularFireObject,
+  AngularFireList
+} from "angularfire2/database";
 
-import * as firebase from 'firebase/app';
+import * as firebase from "firebase/app";
 
 @Injectable()
 export class IdeaStoreService {
-  private ideas: FirebaseListObservable<any[]>;
+  private ideasRef: AngularFireList<Idea>;
+  private ideas: Observable<Idea[]>;
 
   constructor(private af: AngularFireDatabase) {
     if (!environment.production) {
       console.log("IdeaStoreService : constructor");
     }
-    this.ideas = this.af.list('/ideas');
+    this.ideasRef = this.af.list<Idea>("/ideas");
+    this.ideas = this.ideasRef.snapshotChanges().map(actions => {
+      return actions.map(action => ({
+        key: action.key,
+        ...action.payload.val()
+      }));
+    });
   }
 
   get ideas$() {
-    return this.ideas/*.asObservable()*/;
+    return this.ideas;
   }
 
   public addIdea(newIdea: Idea): firebase.database.ThenableReference {
-    return this.ideas.push(newIdea);
+    return this.ideasRef.push(newIdea);
   }
 
-  public getIdea(key: string): FirebaseObjectObservable<Idea> {
+  public getIdea(key: string): Observable<Idea> {
     if (!environment.production) {
       console.log("IdeaStoreService : getIdea : [" + key + "]");
     }
-    return this.af.object(`/ideas/${key}`);
+    return this.af
+      .object<Idea>("/ideas/" + key)
+      .snapshotChanges()
+      .map(action => {
+        return { key: action.key, ...action.payload.val() };
+      });
   }
 
-  public updateIdea(idea: Idea): firebase.Promise<void> {
-    return this.af.object('/ideas/' + idea.$key).update(idea);
+  public updateIdea(idea: Idea): Promise<void> {
+    return this.af.object("/ideas/" + idea.key).update(idea);
   }
 
-  public deleteIdea($key: string): firebase.Promise<void> {
-    return this.af.object('/ideas/' + $key).remove();
+  public deleteIdea($key: string): Promise<void> {
+    return this.af.object("/ideas/" + $key).remove();
   }
 }

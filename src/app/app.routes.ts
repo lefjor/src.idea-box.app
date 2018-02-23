@@ -1,5 +1,4 @@
 import {Routes} from '@angular/router';
-import {AppComponent} from './app.component';
 import {IdeaListComponent} from './idea/idea-list/idea-list.component';
 import {IdeaFormComponent} from './idea/idea-form/idea-form.component';
 import {IdeaDetailComponent} from './idea/idea-detail/idea-detail.component';
@@ -9,23 +8,17 @@ import {BugFormComponent} from './bug/bug-form/bug-form.component';
 import {AuthGuard} from './service/guard/auth.guard';
 import {IdeaResolve} from './idea/idea.resolve';
 
-export const ROUTES:Routes = [
+export const ROUTES: Routes = [
   {path: 'login', component: LoginFormComponent},
   {path: 'signup', component: SignupFormComponent},
+  {path: 'bugs/add', component: BugFormComponent},
   {
-    path: '', /*canActivate: [AuthGuard],*/
+    path: '', canActivate: [AuthGuard],
     children: [
-      {path: 'idea-form/:ideaId', component: IdeaFormComponent, resolve: {idea: IdeaResolve}},
-      {path: 'idea-form', component: IdeaFormComponent},
-      {path: 'idea-detail/:ideaId', component: IdeaDetailComponent, resolve: {idea: IdeaResolve}},
-      {path: 'idea-list', component: IdeaListComponent},
-      {path: 'bug-form', component: BugFormComponent}
+      {path: 'ideas/add', component: IdeaFormComponent},
+      {path: 'ideas/add/:ideaId', component: IdeaFormComponent, resolve: {idea: IdeaResolve}},
+      {path: 'ideas/:ideaId', component: IdeaDetailComponent, resolve: {idea: IdeaResolve}},
+      {path: 'ideas', component: IdeaListComponent}
     ]
-  },
-  /*{path: '', redirectTo: 'idea-list', pathMatch: 'full'},
-   /*{
-   path: '**',
-   redirectTo: '/idea-list',
-   pathMatch: 'full'
-   }*/
+  }
 ];

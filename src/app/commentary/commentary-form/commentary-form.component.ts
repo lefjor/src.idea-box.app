@@ -1,14 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import {Idea} from '../../model/idea';
-import {Commentary} from '../../model/commentary';
+import { Idea } from '../../model/idea';
+import { Commentary } from '../../model/commentary';
 
-import {CommentaryService} from '../../service/commentary.service';
-import {AuthService} from '../../service/auth.service';
+import { CommentaryService } from '../../service/commentary.service';
+import { AuthService } from '../../service/auth.service';
 
 import * as firebase from 'firebase/app';
 
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-commentary-form',
@@ -16,17 +16,17 @@ import {Observable} from 'rxjs/Observable';
   styleUrls: ['./commentary-form.component.scss']
 })
 export class CommentaryFormComponent implements OnInit {
-  @Input() idea:Idea;
+  @Input() idea: Idea;
 
-  comment:Commentary;
+  comment: Commentary;
 
-  constructor(private commentaryService:CommentaryService, private authService:AuthService) {
+  constructor(private commentaryService: CommentaryService, private authService: AuthService) {
   }
 
-  private initComment():void {
+  private initComment(): void {
     this.comment = new Commentary();
-    this.comment.ideaKey = this.idea.$key;
-    this.comment.value = "";
+    this.comment.ideaKey = this.idea.key;
+    this.comment.value = '';
     this.comment.userId = this.authService.getEmail();
     this.comment.userPseudonyme = this.authService.getPseudonyme();
   }
@@ -35,13 +35,13 @@ export class CommentaryFormComponent implements OnInit {
     this.initComment();
   }
 
-  public handleKeyEvent():void {
-    if(this.comment.value.trim() != "") {
+  public handleKeyEvent(): void {
+    if (this.comment.value.trim() !== '') {
       this.addCommentToIdea(this.idea);
     }
   }
 
-  public addCommentToIdea(idea:Idea):void {
+  public addCommentToIdea(idea: Idea): void {
     this.comment.lastModified = new Date().getTime();
     this.comment.invertTime = Number.MAX_SAFE_INTEGER - Date.now();
     this.commentaryService.pushCommentary(this.comment).then(() => {

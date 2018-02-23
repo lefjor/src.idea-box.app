@@ -20,7 +20,7 @@ export class CommentaryListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.comments = this.commentaryService.getCommentariesByIdeaKey(this.idea.$key);
+    this.comments = this.commentaryService.getCommentariesByIdeaKey(this.idea.key);
 
     //this.comments = this.commentaryService.getCommentariesByIdeaKey(this.idea.$key);
     //this.commentaryService.getCommentariesByIdeaKey(this.idea.$key).subscribe(test => console.log(test));

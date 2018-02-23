@@ -1,32 +1,48 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
-import {BehaviorSubject, Observable} from "rxjs";
+import { Observable } from "rxjs/Observable";
 
-import {AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
+import { AngularFireDatabase } from "angularfire2/database";
 
-import * as firebase from 'firebase/app';
+import { Reaction } from "../model/reaction";
+
+import * as firebase from "firebase/app";
 
 @Injectable()
 export class ReactionService {
-  private thumbsupReaction:FirebaseListObservable<any>;
+  private thumbsupReaction: Observable<any>;
 
-  constructor(private af:AngularFireDatabase) {
-    this.thumbsupReaction = this.af.list('/reactions/thumbsup/', {preserveSnapshot: true});
+  constructor(private af: AngularFireDatabase) {
+    this.thumbsupReaction = this.af.list("/reactions/thumbsup/").valueChanges();
   }
 
-  public getAllThumbsUp():FirebaseListObservable<any> {
+  public getAllThumbsUp(): Observable<any> {
     return this.thumbsupReaction;
   }
 
-  public addReaction(ideaKey:string, userId:string):firebase.database.ThenableReference {
-    return this.af.list('/reactions/thumbsup/' + ideaKey).push(userId);
+  public addReaction(
+    ideaKey: string,
+    userId: string
+  ): firebase.database.ThenableReference {
+    return this.af.list("/reactions/thumbsup/" + ideaKey).push(userId);
   }
 
-  public getAllReactions(reactionType:string, ideaKey:string):FirebaseListObservable<any> {
-    return this.af.list('/reactions/' + reactionType + '/' + ideaKey + '/');
+  public getAllReactions(
+    reactionType: string,
+    ideaKey: string
+  ): Observable<Reaction[]> {
+    return this.af
+      .list("/reactions/" + reactionType + "/" + ideaKey + "/")
+      .snapshotChanges()
+      .map(actions => {
+        return actions.map(action => ({
+          key: action.key,
+          mail: action.payload.val()
+        }));
+      });
   }
 
-  public deleteReaction(ideaKey:string, reactionKey:string):firebase.Promise<void> {
-    return this.af.list('/reactions/thumbsup/' + ideaKey).remove(reactionKey);
+  public deleteReaction(ideaKey: string, reactionKey: string): Promise<void> {
+    return this.af.list("/reactions/thumbsup/" + ideaKey).remove(reactionKey);
   }
 }

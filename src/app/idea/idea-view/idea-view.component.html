@@ -1,6 +1,6 @@
 <img *ngIf="idea.imageSrc" class="card-img-top mx-auto d-block img-fluid" [src]="idea.imageSrc" alt="Card image cap">
 <h4 class="card-header text-center">
-  <a *ngIf="linkEnabled; else noLink" href="" [routerLink]="['/idea-detail',idea.$key]">{{idea.title}}</a>
+  <a *ngIf="linkEnabled; else noLink" href="" [routerLink]="['/ideas',idea.key]">{{idea.title}}</a>
   <ng-template #noLink><a href=""
                   [attr.tabindex]="!linkEnabled ? -1 : null">{{idea.title}}</a></ng-template>
 </h4>
@@ -10,7 +10,7 @@
 </div>
 <div *ngIf="modificationAuthorized || !linkEnabled" class="card-footer card-footer-fake text-center">
   <div class="btn-group" role="group" aria-label="Menu d'une idée">
-    <a href="" [routerLink]="['/idea-form',idea.$key]"
+    <a href="" [routerLink]="['/ideas/add',idea.key]"
        class="btn btn-secondary"
        [class.disabled]="!linkEnabled ? true : null" [attr.tabindex]="!linkEnabled ? -1 : null"><i
       class="octicon octicon-pencil"></i></a>

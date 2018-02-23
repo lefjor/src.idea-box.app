@@ -7,29 +7,29 @@ import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class AuthService {
-  authState$:Observable<firebase.User>;
+  authState$: Observable<firebase.User>;
 
-  constructor(private afAuth:AngularFireAuth) {
+  constructor(private afAuth: AngularFireAuth) {
     this.authState$ = afAuth.authState;
   }
 
-  getEmail():string {
+  getEmail(): string {
     return this.afAuth.auth.currentUser.email;
   }
 
-  getPseudonyme():string {
+  getPseudonyme(): string {
     return this.afAuth.auth.currentUser.displayName;
   }
 
-  loginWithEmailAndPassword(email:string, password:string):firebase.Promise<firebase.auth.UserCredential> {
+  loginWithEmailAndPassword(email: string, password: string): Promise<firebase.auth.UserCredential> {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
 
-  signup(email:string, password:string):firebase.Promise<firebase.auth.UserCredential> {
+  signup(email: string, password: string): Promise<firebase.auth.UserCredential> {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password);
   }
 
-  updateProfile(pseudonyme:string):firebase.Promise<any> {
+  updateProfile(pseudonyme: string): Promise<any> {
     return this.afAuth.auth.currentUser.updateProfile({
       displayName: pseudonyme,
       photoURL: null

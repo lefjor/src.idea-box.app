@@ -20,11 +20,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit():void {
     this.showBreakingPoints = environment.showBreakingPoints;
-    this.authService.authState$.subscribe(auth => {
+    this.authService.authState$.subscribe();/*auth => {
       if(auth) {
         this.router.navigate(['/idea-list'])
       }
-    });
+    });*/
   }
 
   rechercher():void {
